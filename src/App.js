@@ -3,10 +3,8 @@ import './static/App.css';
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import SearchBar from "./components/search-bar/SearchBar";
+import ReviewForm from "./components/form/ReviewForm";
 
 
 class App extends Component {
@@ -25,12 +23,13 @@ class App extends Component {
                     <Container className='fill'>
                         <div className='content'>
                             <Row>
-                                <Col>
-                                    <ButtonToolbar>
-                                        <Button className='home-tab'>Find Manager</Button>
-                                        <Button className='home-tab'>Rate Manager</Button></ButtonToolbar>
-                                </Col>
+                                {/*<Col>*/}
+                                    {/*<ButtonToolbar>*/}
+                                        {/*<Button className='home-tab'>Find Manager</Button>*/}
+                                        {/*<Button className='home-tab'>Rate Manager</Button></ButtonToolbar>*/}
+                                {/*</Col>*/}
                             </Row>
+                            <ReviewForm/>
                         </div>
                     </Container>
                 </main>

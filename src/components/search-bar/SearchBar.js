@@ -10,13 +10,14 @@ import ReactSelect from "../ReactSelect";
 
 class SearchBar extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            companyOptions : [],
-            managerOptions : [],
-            openMenu: false
+            companyOptions: [],
+            managerOptions: [],
+            companyValue: '',
+            managerValue: ''
         }
     }
 
@@ -34,18 +35,32 @@ class SearchBar extends Component {
         const {companies} = nextProps;
         let companyOptions;
         let changes = {};
-        if(companies && companies.length > 0) {
-            companyOptions = companies.map(val => {return {value: val.id, label: val.name}});
-            changes = { ...prevState, companyOptions: companyOptions};
+        if (companies && companies.length > 0) {
+            companyOptions = companies.map(val => {
+                return {value: val.id, label: val.name}
+            });
+            changes = {...prevState, companyOptions: companyOptions};
         }
 
         return Object.keys(changes).length > 0 ? changes : null;
     }
 
+    updateCompanyValue = (value) => {
+        this.setState({
+            companyValue: value
+        })
+    };
+
+    updateManagerValue = (value) => {
+        this.setState({
+            mangerValue: value
+        })
+    };
+
 
     render() {
 
-        const {managerOptions, companyOptions} = this.state;
+        const {managerOptions, companyOptions, companyValue, managerValue} = this.state;
         return (
 
             <Navbar className="bg-light justify-content-between" sticky='top'>
@@ -54,12 +69,16 @@ class SearchBar extends Component {
                         <Row>
                             <Col>
                                 <ReactSelect options={managerOptions}
-                                        placeholder='Manager'
+                                             placeholder='Manager'
+                                             value={managerValue}
+                                             handleOnChange={this.updateManagerValue}
                                 />
                             </Col>
                             <Col>
                                 <ReactSelect options={companyOptions}
-                                        placeholder='Company'
+                                             placeholder='Company'
+                                             value={companyValue}
+                                             handleOnChange={this.updateCompanyValue}
                                 />
                             </Col>
                             <Col xs={2}>
@@ -79,7 +98,7 @@ const mapStateToProps = (state) => {
     const {search} = state;
 
     return {
-        companies : search.companies
+        companies: search.companies
     }
 };
 

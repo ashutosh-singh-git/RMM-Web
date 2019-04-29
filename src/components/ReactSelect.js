@@ -8,14 +8,14 @@ class ReactSelect extends Component {
 
         this.state = {
             openMenu: false,
-            value: {value: 1000, label: ''}
         }
     }
 
     handleInputChange = (query, {action}) => {
+        const {handleOnChange} = this.props;
         if (action === "input-change") {
+            handleOnChange({value: 1000, label: query});
             this.setState({
-                value: {value: 1000, label: query},
                 openMenu: true
             });
         }
@@ -30,19 +30,20 @@ class ReactSelect extends Component {
     };
 
     handleChange = (pro) => {
+        const {handleOnChange} = this.props;
+        handleOnChange(pro);
         this.setState({
-            value: pro,
             openMenu: false
         });
     };
 
     render() {
 
-        const {openMenu, value} = this.state;
+        const {openMenu} = this.state;
+
 
         return (
             <Select {...this.props}
-                    value={value}
                     onChange={this.handleChange}
                     components={
                         {
@@ -54,7 +55,6 @@ class ReactSelect extends Component {
                     onInputChange={this.handleInputChange}
                     menuIsOpen={openMenu}
                     onBlur={this.hideMenu}
-                    keepCursorAtEnd={true}
             />
         );
     }
