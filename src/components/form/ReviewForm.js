@@ -1,14 +1,7 @@
 import React, {Component} from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import FormGroup from "react-bootstrap/es/FormGroup";
-import FormLabel from "react-bootstrap/es/FormLabel";
-import FormControl from "react-bootstrap/es/FormControl";
-import Button from "react-bootstrap/Button";
 import connect from "react-redux/src/connect/connect";
 import ReactSelect from "../ReactSelect";
 import Select from "react-select";
-import Form from "react-bootstrap/Form";
 import {submitNewManagerAction} from "./ReviewAction";
 
 const genderOptions = [
@@ -79,61 +72,64 @@ class ReviewForm extends Component {
 
         return (
             <>
-                <Col>
+                <div className='col'>
                     <h3>Add Manager</h3>
-                </Col>
-                <Col md={10} style={{marginTop: "20px"}}>
-                    <Form onSubmit={this.handleSubmit}>
-                        <FormGroup as={Row} controlId="formManagerName">
-                            <FormLabel column>
+                </div>
+                <div className='col-md-10' style={{marginTop: "20px"}}>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className='row form-group'>
+                            <label className='col' htmlFor="formManagerName">
                                 Manager Name
-                            </FormLabel>
-                            <Col sm="2">
+                            </label>
+                            <div className='col-sm-2'>
                                 <Select name={'gender'}
                                         options={genderOptions}
                                         defaultValue={genderOptions[0]}
+                                        id='formManagerName'
                                 />
-                            </Col>
-                            <Col sm="8">
-                                <FormControl name='manager' required placeholder="Ex. John Doe"/>
-                            </Col>
-                        </FormGroup>
-                        <FormGroup as={Row} controlId="formProjectManager">
-                            <FormLabel column>
+                            </div>
+                            <div className='col-sm-8'>
+                                <input type='text' name='manager' required placeholder="Ex. John Doe"/>
+                            </div>
+                        </div>
+                        <div className='row form-group'>
+                            <label  className='col custom-control-label' htmlFor="formProjectManager">
                                 Designation
-                            </FormLabel>
-                            <Col sm="10">
+                            </label>
+                            <div className='col-sm-10'>
                                 <Select name={'designation'}
                                         options={desOptions}
                                         defaultValue={desOptions[0]}
+                                        id='formProjectManager'
                                 />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup as={Row} controlId="formPlaintextEmail">
-                            <FormLabel column sm={2}>
+                            </div>
+                        </div>
+                        <div className='row form-group'>
+                            <label className='col-sm-2 custom-control-label' htmlFor="formPlaintextEmail">
                                 Company
-                            </FormLabel>
-                            <Col sm="10">
+                            </label>
+                            <div className='col-sm-10'>
                                 <ReactSelect name={'company'}
                                              required
                                              options={companyOptions}
                                              value={companyValue}
                                              placeholder='Company Name'
+                                             id='formPlaintextEmail'
                                              handleOnChange={this.updateCompanyValue}
                                 />
-                            </Col>
-                        </FormGroup>
-                        <FormGroup as={Row} controlId="formCompanyCity">
-                            <FormLabel column sm={2}>
+                            </div>
+                        </div>
+                        <div className='row form-group'>
+                            <label className='col-sm-2 custom-control-label' htmlFor="formCompanyCity">
                                 City
-                            </FormLabel>
-                            <Col sm="10">
-                                <FormControl name={'city'} required placeholder="Gurugram"/>
-                            </Col>
-                        </FormGroup>
-                        <Button type="submit" style={{float: "right"}}>Submit</Button>
-                    </Form>
-                </Col>
+                            </label>
+                            <div className='col-sm-10'>
+                                <input type='text' name={'city'} id='formCompanyCity' required placeholder="Gurugram"/>
+                            </div>
+                        </div>
+                        <button type="submit" style={{float: "right"}}>Submit</button>
+                    </form>
+                </div>
             </>
         );
     }

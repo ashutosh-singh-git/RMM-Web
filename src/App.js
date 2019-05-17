@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import './static/App.css';
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
+import './static/app.css';
 import SearchBar from "./components/search-bar/SearchBar";
 import ReviewForm from "./components/form/ReviewForm";
+import SearchResults from "./components/results/SearchResults";
+import {Route, Switch} from "react-router-dom";
 
 
 class App extends Component {
@@ -12,26 +11,15 @@ class App extends Component {
     render() {
 
         return (
-            <div className="App">
-                <Navbar bg="secondary" variant="dark">
-                    <Navbar.Brand href="#">
-                        {'Review'}
-                    </Navbar.Brand>
-                </Navbar>
+            <div className="app">
+                <SearchBar/>
                 <main>
-                    <SearchBar/>
-                    <Container className='fill'>
-                        <div className='content'>
-                            <Row>
-                                {/*<Col>*/}
-                                    {/*<ButtonToolbar>*/}
-                                        {/*<Button className='home-tab'>Find Manager</Button>*/}
-                                        {/*<Button className='home-tab'>Rate Manager</Button></ButtonToolbar>*/}
-                                {/*</Col>*/}
-                            </Row>
-                            <ReviewForm/>
-                        </div>
-                    </Container>
+                    <div className='container fill'>
+                        <Switch>
+                            <Route path='/add' component={ReviewForm}/>
+                            <Route path='/results' component={SearchResults}/>
+                        </Switch>
+                    </div>
                 </main>
             </div>
         );

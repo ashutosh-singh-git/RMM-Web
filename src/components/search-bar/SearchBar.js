@@ -1,9 +1,4 @@
 import React, {Component} from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Navbar from "react-bootstrap/Navbar";
 import connect from "react-redux/src/connect/connect";
 import {getAllCompaniesAction} from "./SearchAction";
 import ReactSelect from "../ReactSelect";
@@ -27,7 +22,7 @@ class SearchBar extends Component {
     };
 
     componentDidMount() {
-        this.props.getAllCompaniesAction();
+        // this.props.getAllCompaniesAction();
     }
 
 
@@ -63,31 +58,44 @@ class SearchBar extends Component {
         const {managerOptions, companyOptions, companyValue, managerValue} = this.state;
         return (
 
-            <Navbar className="bg-light justify-content-between" sticky='top'>
-                <Container>
+            <nav className="nav nav-bar" sticky='top'>
+                <div className='container-fluid'>
                     <div className="search-bar">
-                        <Row>
-                            <Col>
-                                <ReactSelect options={managerOptions}
-                                             placeholder='Manager'
-                                             value={managerValue}
-                                             handleOnChange={this.updateManagerValue}
-                                />
-                            </Col>
-                            <Col>
-                                <ReactSelect options={companyOptions}
-                                             placeholder='Company'
-                                             value={companyValue}
-                                             handleOnChange={this.updateCompanyValue}
-                                />
-                            </Col>
-                            <Col xs={2}>
-                                <Button variant='success' type="submit" onClick={this.onSearchSubmit}>Search</Button>
-                            </Col>
-                        </Row>
+                        <div className='row'>
+                            <div className='col-2'>
+                                <a className="navbar-brand" href="/"><span className='logo'>Manager Review</span></a>
+                            </div>
+                            <div className='col-8'>
+                                <div className='row'>
+                                    <div className='col-5'>
+                                        <ReactSelect options={managerOptions}
+                                                     placeholder='Manager'
+                                                     value={managerValue}
+                                                     handleOnChange={this.updateManagerValue}
+                                        />
+                                    </div>
+                                    <div className='col-5'>
+                                        <ReactSelect options={companyOptions}
+                                                     placeholder='Company'
+                                                     value={companyValue}
+                                                     handleOnChange={this.updateCompanyValue}
+                                        />
+                                    </div>
+                                    <div className='col-2 mx-auto'>
+                                        <button className='btn h-100 rounded search-btn' type="submit"
+                                                onClick={this.onSearchSubmit}>
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='col-2 my-auto'>
+                                <span className='float-right'>Login | Register</span>
+                            </div>
+                        </div>
                     </div>
-                </Container>
-            </Navbar>
+                </div>
+            </nav>
         );
     }
 

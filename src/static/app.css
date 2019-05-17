@@ -1,0 +1,69 @@
+@import "bootstrap.min.css";
+
+:root {
+    --main-bg-color: #F0F0F0;
+    --floral-color: #00D3BD;
+    --orange-color: #FC9700;
+    --nav-bg-color: #1D1E4C;
+    --font-wt-h3: 25px;
+}
+
+.app {
+    height: 100%;
+}
+
+.floral-color {
+    color: var(--floral-color);
+}
+
+.orange-color {
+    color: var(--orange-color);
+}
+
+.nav-bar {
+    background: var(--nav-bg-color);
+    height: 90px;
+    color: white;
+}
+
+.search-btn {
+    background: var(--floral-color);
+    font-weight: bold;
+}
+
+html, body, main {
+    background: var(--main-bg-color);
+    height: 100%;
+    font-family: Raleway;
+}
+
+.logo {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+#root {
+    height: 100%;
+}
+
+.fill {
+    min-height: 100%;
+    height: 100%;
+    /*border: 1px solid black;*/
+    padding: 25px 0;
+}
+
+.result-card {
+    background: white;
+    margin: 10px 0;
+}
+
+.search-bar {
+    width: 100%;
+    margin: 26px 0;
+}
+
+.designation {
+    font-size: small;
+}
