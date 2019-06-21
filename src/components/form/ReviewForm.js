@@ -51,7 +51,7 @@ class ReviewForm extends Component {
         const form = e.target;
         const {companyValue} = this.state;
 
-        if(!companyValue){
+        if (!companyValue) {
             alert('company name is required');
             return;
         }
@@ -72,13 +72,13 @@ class ReviewForm extends Component {
 
         return (
             <>
-                <div className='col'>
-                    <h3>Add Manager</h3>
+                <div className='col-md-10 mx-auto'>
+                    <span className='h4 text-muted'>Add Manager</span>
                 </div>
-                <div className='col-md-10' style={{marginTop: "20px"}}>
+                <div className='col-md-10 mx-auto' style={{marginTop: "20px"}}>
                     <form onSubmit={this.handleSubmit}>
                         <div className='row form-group'>
-                            <label className='col' htmlFor="formManagerName">
+                            <label className='col h-100 my-auto text-muted' htmlFor="formManagerName">
                                 Manager Name
                             </label>
                             <div className='col-sm-2'>
@@ -89,11 +89,11 @@ class ReviewForm extends Component {
                                 />
                             </div>
                             <div className='col-sm-8'>
-                                <input type='text' name='manager' required placeholder="Ex. John Doe"/>
+                                <input className='form-input' type='text' name='manager' required placeholder="Ex. John Doe"/>
                             </div>
                         </div>
                         <div className='row form-group'>
-                            <label  className='col custom-control-label' htmlFor="formProjectManager">
+                            <label className='col h-100 my-auto text-muted' htmlFor="formProjectManager">
                                 Designation
                             </label>
                             <div className='col-sm-10'>
@@ -105,7 +105,7 @@ class ReviewForm extends Component {
                             </div>
                         </div>
                         <div className='row form-group'>
-                            <label className='col-sm-2 custom-control-label' htmlFor="formPlaintextEmail">
+                            <label className='col-sm-2 h-100 my-auto text-muted' htmlFor="formPlaintextEmail">
                                 Company
                             </label>
                             <div className='col-sm-10'>
@@ -120,14 +120,17 @@ class ReviewForm extends Component {
                             </div>
                         </div>
                         <div className='row form-group'>
-                            <label className='col-sm-2 custom-control-label' htmlFor="formCompanyCity">
+                            <label className='col-sm-2 h-100 my-auto text-muted' htmlFor="formCompanyCity">
                                 City
                             </label>
                             <div className='col-sm-10'>
-                                <input type='text' name={'city'} id='formCompanyCity' required placeholder="Gurugram"/>
+                                <input className='form-input' type='text' name={'city'} id='formCompanyCity' required placeholder="Gurugram"/>
                             </div>
                         </div>
-                        <button type="submit" style={{float: "right"}}>Submit</button>
+                        <div className='col'>
+                            <button className='btn h-100 rounded cmn-btn add-btn' type="submit">
+                                <span className='btn-txt'>ADD MANAGER</span></button>
+                        </div>
                     </form>
                 </div>
             </>

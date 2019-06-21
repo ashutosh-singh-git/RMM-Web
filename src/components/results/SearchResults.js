@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {truncateText} from "../../util/CommonUtil";
+import {getManagerSlug, truncateText} from "../../util/CommonUtil";
+import {Link} from "react-router-dom";
 
 const data = [
     {
@@ -72,16 +73,19 @@ class SearchResults extends Component {
                 <div className='h4 text-muted mt-2'><span>Search Results For - </span>
                     <span className='font-weight-bolder'>Allen</span> || <span
                         className='h6'>Couldn't see the manager </span>
-                    <span className='h6 floral-color'>Add A Manager</span>
+                    <Link to='add'><span className='h6 floral-color'>Add A Manager</span></Link>
                 </div>
                 <div className='row flex-row'>
                     {data.map(v => (
                             <div className='col-md-4' key={v.id}>
                                 <div className='card result-card '>
                                     <div className='card-body rounded shadow-sm'>
-                                        <div className='card-title'><span className='font-weight-bolder'>{v.name}</span>
+                                        <div className='card-title'>
+                                            <span className='font-weight-bolder'>
+                                            <Link to={getManagerSlug(v.name)}>{v.name}</Link>
+                                            </span>
                                         </div>
-                                        <div className='card-subtitle designation'><span>{v.designation} @ </span>
+                                        <div className='card-subtitle small'><span>{v.designation} @ </span>
                                             <span className='floral-color font-weight-bold'>{v.company}</span>
                                         </div>
                                         <div className='h6 text-muted'>{v.location}</div>
@@ -90,13 +94,13 @@ class SearchResults extends Component {
                                                 {
                                                     Array.from({length: v.averageRating}, (item, index) => (
                                                         <span className="fa fa-star orange-color" data-rating={index + 1}
-                                                              key={index}></span>
+                                                              key={index}/>
                                                     ))
                                                 }
                                                 {
                                                     Array.from({length: 5 - v.averageRating}, (item, index) => (
                                                         <span className="fa fa-star text-muted"
-                                                              data-rating={v.averageRating + index + 1} key={index}></span>
+                                                              data-rating={v.averageRating + index + 1} key={index}/>
                                                     ))
                                                 }</div>
                                             <div className='col-md-4'>
@@ -104,7 +108,7 @@ class SearchResults extends Component {
                                             </div>
                                         </div>
                                         <div className='mt-3'>
-                                            <div><i className="fa fa-quote-left" style={{opacity: 0.3}}></i></div>
+                                            <div><i className="fa fa-quote-left" style={{opacity: 0.3}}/></div>
                                             <small>{truncateText(v.promotedReview.comments)}</small>
                                             <footer className="blockquote-footer">{v.promotedReview.reviewer}</footer>
                                         </div>

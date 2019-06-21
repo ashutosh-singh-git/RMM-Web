@@ -17,12 +17,13 @@ class SearchBar extends Component {
     }
 
     onSearchSubmit = (e) => {
-        console.log(e);
+        const {managerValue, companyValue} = this.state;
+        console.log(managerValue, companyValue);
         e.preventDefault();
     };
 
     componentDidMount() {
-        // this.props.getAllCompaniesAction();
+        this.props.getAllCompaniesAction();
     }
 
 
@@ -47,6 +48,7 @@ class SearchBar extends Component {
     };
 
     updateManagerValue = (value) => {
+        console.log('manager',value);
         this.setState({
             mangerValue: value
         })
@@ -82,9 +84,9 @@ class SearchBar extends Component {
                                         />
                                     </div>
                                     <div className='col-2 mx-auto'>
-                                        <button className='btn h-100 rounded search-btn' type="submit"
+                                        <button className='btn h-100 rounded cmn-btn search-btn' type="submit"
                                                 onClick={this.onSearchSubmit}>
-                                            Search
+                                            <span className='btn-txt'>SEARCH</span>
                                         </button>
                                     </div>
                                 </div>

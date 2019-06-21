@@ -8,3 +8,15 @@ export const truncateText = (val) => {
     }
     return val;
 };
+
+
+export const getManagerSlug = (val) => {
+    return 'manager/'+ makeSlug(val);
+};
+
+export const makeSlug = (val) => {
+    return val
+        .toLowerCase()
+        .replace(/[^\w ]+/g,'')
+        .replace(/ +/g,'-');
+};
