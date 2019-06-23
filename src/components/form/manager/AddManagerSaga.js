@@ -1,7 +1,7 @@
 import {call, put,} from 'redux-saga/effects';
-import {takeFirst} from "../../util/ReduxSagaUtil";
-import ReviewActions, {submitNewManagerSuccess} from "./ReviewAction";
-import {submitNewManager} from "../../controller/ReviewController";
+import {takeFirst} from "../../../util/ReduxSagaUtil";
+import AddManagerActions, {submitNewManagerSuccess} from "./AddManagerAction";
+import {submitNewManager} from "../../../controller/ReviewController";
 
 function* newManagerAddition(action) {
 
@@ -17,5 +17,5 @@ function* newManagerAddition(action) {
 }
 
 export default [
-    takeFirst(ReviewActions.NEW_MANAGER_SUBMIT, newManagerAddition),
+    takeFirst(AddManagerActions.NEW_MANAGER_SUBMIT, newManagerAddition),
 ];

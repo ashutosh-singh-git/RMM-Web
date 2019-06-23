@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
 import SearchBarReducer from "../components/search-bar/SearchBarReducer";
-import ReviewReducer from "../components/form/ReviewReducer";
+import AddManagerReducer from "../components/form/manager/AddManagerReducer";
 
 
 const reducers =  combineReducers({
     search: SearchBarReducer,
-    review: ReviewReducer
+    review: AddManagerReducer
 });
 
 export default reducers;

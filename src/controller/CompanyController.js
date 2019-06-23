@@ -1,7 +1,7 @@
-import {EndPoints} from "../config/EndPoints";
+import {CommonConfig} from "../config/CommonConfig";
 import RequestUtil from "../util/RequestUtil";
 
-const { CompanyAll } = EndPoints;
+const { CompanyAll } = CommonConfig;
 
 export const fetchAllCompaniesApi = () => RequestUtil.GET({
     url: `${CompanyAll}`,

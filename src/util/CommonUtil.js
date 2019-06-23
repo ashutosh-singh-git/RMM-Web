@@ -11,7 +11,7 @@ export const truncateText = (val) => {
 
 
 export const getManagerSlug = (val) => {
-    return 'manager/'+ makeSlug(val);
+    return '/manager/'+ makeSlug(val);
 };
 
 export const makeSlug = (val) => {

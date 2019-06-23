@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {getManagerSlug, truncateText} from "../../util/CommonUtil";
 import {Link} from "react-router-dom";
 import PersonReviewsList from "./PersonReveiwsList";
-import RateManager from "./RateManager";
+import RateManager from "../form/review/RateManager";
 
 const v = {
     id: 23,
@@ -26,6 +26,8 @@ class ManagerDetails extends Component {
 
         const {match: {params}} = this.props;
 
+        const isRating = params.function === 'rate';
+
         return (
             <>
                 <div className='h4 text-muted mt-2'>
@@ -37,7 +39,7 @@ class ManagerDetails extends Component {
                             <div className='card-body rounded shadow-sm'>
                                 <div className='card-title h4'>
                                             <span className='font-weight-bolder'>
-                                            <Link to={getManagerSlug(v.name)}>{v.name}</Link>
+                                            {v.name}
                                             </span>
                                 </div>
                                 <div className='card-subtitle small'><span>{v.designation} @ </span>
@@ -66,9 +68,10 @@ class ManagerDetails extends Component {
                                     <small>{truncateText(v.promotedReview.comments)}</small>
                                 </div>
                                 <div>
-                                    <button className='btn h-100 rounded cmn-btn my-3' type="submit">
-                                        <span className='btn-txt'>RATE THIS MANAGER</span>
-                                    </button>
+                                    <Link to={isRating ? `${getManagerSlug(v.name)}`: this.props.location.pathname + '/rate'}>
+                                        <button className='btn h-100 rounded cmn-btn my-3' type="submit">
+                                        <span className='btn-txt'>{isRating ? 'SEE REVIEWS' :'RATE THIS MANAGER'}</span>
+                                    </button></Link>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +79,7 @@ class ManagerDetails extends Component {
                     <div className='col-md-8'>
                         <div className='card result-card '>
                             <div className='card-body rounded shadow-sm'>
-                                {params.function === 'add' ? <RateManager/> : <PersonReviewsList/>}
+                                {isRating ? <RateManager/> : <PersonReviewsList/>}
                             </div>
                         </div>
                     </div>

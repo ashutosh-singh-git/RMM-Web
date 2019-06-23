@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './static/app.css';
 import SearchBar from "./components/search-bar/SearchBar";
-import ReviewForm from "./components/form/ReviewForm";
+import ReviewForm from "./components/form/manager/AddManager";
 import ManagerDetails from "./components/details/ManagerDetails";
 import {Route, Switch} from "react-router-dom";
 import SearchResults from "./components/results/SearchResults";
@@ -19,6 +19,7 @@ class App extends Component {
                         <Switch>
                             <Route path='/add' component={ReviewForm}/>
                             <Route path='/manager/:name/:function?' component={ManagerDetails}/>
+                            <Route path='/manager/:name/:function?/rate' component={ManagerDetails}/>
                             <Route path='/results' component={SearchResults}/>
                         </Switch>
                     </div>

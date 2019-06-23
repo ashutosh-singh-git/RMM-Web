@@ -1,14 +1,14 @@
-import ReviewActions from "./ReviewAction";
+import AddManagerActions from "./AddManagerAction";
 
 const initialState = {
     manager: {}
 };
 
-const ReviewReducer = (state = initialState, action = {}) => {
+const AddManagerReducer = (state = initialState, action = {}) => {
     let changes = {};
 
     switch (action.type) {
-        case ReviewActions.NEW_MANAGER_SUBMIT_SUCCESS:
+        case AddManagerActions.NEW_MANAGER_SUBMIT_SUCCESS:
             changes = {
                 manager: action.payload
             };
@@ -21,4 +21,4 @@ const ReviewReducer = (state = initialState, action = {}) => {
     return { ...state, ...changes };
 };
 
-export default ReviewReducer;
+export default AddManagerReducer;

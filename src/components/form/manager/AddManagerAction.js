@@ -1,16 +1,16 @@
-export const ReviewActions = {
+export const AddManagerActions = {
     NEW_MANAGER_SUBMIT: 'NEW_MANAGER_SUBMIT',
     NEW_MANAGER_SUBMIT_SUCCESS: 'NEW_MANAGER_SUBMIT_SUCCESS',
 };
 
-export default ReviewActions;
+export default AddManagerActions;
 
 export const submitNewManagerAction = (payload) => ({
-    type: ReviewActions.NEW_MANAGER_SUBMIT,
+    type: AddManagerActions.NEW_MANAGER_SUBMIT,
     data: payload
 });
 
 export const submitNewManagerSuccess = payload => ({
-    type: ReviewActions.NEW_MANAGER_SUBMIT_SUCCESS,
+    type: AddManagerActions.NEW_MANAGER_SUBMIT_SUCCESS,
     ...payload
 });

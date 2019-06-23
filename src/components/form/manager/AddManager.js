@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import connect from "react-redux/src/connect/connect";
-import ReactSelect from "../ReactSelect";
+import ReactSelect from "../../ReactSelect";
 import Select from "react-select";
-import {submitNewManagerAction} from "./ReviewAction";
+import {submitNewManagerAction} from "./AddManagerAction";
 
 const genderOptions = [
     {value: 0, label: 'Mr'},
@@ -15,7 +15,7 @@ const desOptions = [
     {value: 2, label: 'Other'},
 ];
 
-class ReviewForm extends Component {
+class AddManager extends Component {
 
     constructor(props) {
         super(props);
@@ -146,4 +146,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, {submitNewManagerAction})(ReviewForm);
+export default connect(mapStateToProps, {submitNewManagerAction})(AddManager);
