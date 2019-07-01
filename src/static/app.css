@@ -156,6 +156,43 @@ html, body, main {
     z-index: 99;
 }
 
+/*************** MANAGER  RATING RADIO *******************/
+input[type=radio],
+input[type=checkbox] {
+    /* Hide original inputs */
+    visibility: hidden;
+    position: absolute;
+}
+
+input[type=radio] + label:before,
+input[type=checkbox] + label:before {
+    height: 20px;
+    width: 20px;
+    margin-right: 4px;
+    content: " ";
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+input[type=radio] + label:before {
+    background: var(--main-bg-color);
+}
+
+input[type=radio]:checked + label:before,
+input[type=checkbox]:checked + label:before {
+    background: var(--orange-color);
+}
+
+input[type=radio] + label:before {
+    border-radius: 50%;
+}
+
+input[type=checkbox] + label:before {
+    border-radius: 2px;
+}
+
+/*************** --------------- *******************/
+
 .form-input {
     -webkit-align-items: center;
     -webkit-box-align: center;

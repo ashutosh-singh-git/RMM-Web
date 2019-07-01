@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {reviewFormUpdate} from "./form/review/ReviewManagerAction";
+import {connect} from "react-redux";
 
 class LabelRating extends Component {
 
@@ -7,13 +9,17 @@ class LabelRating extends Component {
 
         this.state = {
             active: 2
-        }
+        };
+        const {name, reviewFormUpdate} = props;
+        reviewFormUpdate({key: name, value: 3});
     }
 
     labelClicked = (index) => {
         const {active} = this.state;
+        const {name, reviewFormUpdate} = this.props;
 
         if(index !== active){
+            reviewFormUpdate({key: name, value: index+1});
             this.setState({active: index});
         }
     };
@@ -34,4 +40,4 @@ class LabelRating extends Component {
     }
 }
 
-export default LabelRating;
+export default connect(null,{reviewFormUpdate})(LabelRating);

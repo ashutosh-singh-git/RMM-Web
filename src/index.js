@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {applyMiddleware, createStore} from "redux";
+import {applyMiddleware, compose, createStore} from "redux";
 import createSagaMiddleware from 'redux-saga';
 import reducers from "./redux/Reducers";
 import sagas from "./redux/Sagas";
@@ -13,7 +13,9 @@ import {BrowserRouter} from "react-router-dom";
 const sagaMiddleware = createSagaMiddleware();
 let middleware = applyMiddleware(sagaMiddleware);
 
-let store = createStore(reducers, middleware);
+const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+let store = createStore(reducers, composeEnhancers(middleware));
 sagaMiddleware.run(sagas);
 
 

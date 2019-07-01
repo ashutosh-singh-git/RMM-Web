@@ -2,6 +2,7 @@
 export const CommonConfig = {
     CompanyAll : 'http://localhost:8080/company/all',
     AddManager : 'http://localhost:8080/manager',
+    AddReview : 'http://localhost:8080/review',
 };
 
 

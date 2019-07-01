@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import connect from "react-redux/es/connect/connect";
+import {reviewFormUpdate} from "./form/review/ReviewManagerAction";
 
 class TenRating extends Component {
 
@@ -7,13 +9,17 @@ class TenRating extends Component {
 
         this.state = {
             active: 5
-        }
+        };
+        const {name, reviewFormUpdate} = props;
+        reviewFormUpdate({key: name, value: 5});
     }
 
     labelClicked = (index) => {
         const {active} = this.state;
+        const {name, reviewFormUpdate} = this.props;
 
         if (index + 1 !== active) {
+            reviewFormUpdate({key: name, value: index + 1});
             this.setState({active: index + 1});
         }
     };
@@ -25,7 +31,7 @@ class TenRating extends Component {
         for (let i = 0; i < 10; i++) {
             rows.push(
                 <span onClick={() => this.labelClicked(i)} key={i}
-                      data-title={`${i+1}/10 Rating`}
+                      data-title={`${i + 1}/10 Rating`}
                       className={`r-tooltip rounded-pill px-3 mr-1 rate-label ${i < active ? 'label-selected' : ''}`}/>
             );
         }
@@ -37,4 +43,4 @@ class TenRating extends Component {
     }
 }
 
-export default TenRating;
+export default connect(null, {reviewFormUpdate})(TenRating);
