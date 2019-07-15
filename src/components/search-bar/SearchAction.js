@@ -6,6 +6,8 @@ export const SearchActions = {
     FETCH_SEARCH_SUCCESS: 'FETCH_SEARCH_SUCCESS',
     FETCH_SEARCH_ERROR: 'FETCH_SEARCH_ERROR',
     CLEAR_SEARCH: 'CLEAR_SEARCH',
+    FETCH_MANAGER_REVIEW: 'FETCH_MANAGER_REVIEW_SEARCH',
+    FETCH_MANAGER_REVIEW_SUCCESS: 'FETCH_MANAGER_REVIEW_SEARCH_SUCCESS',
 
     ADD_RECENT_SEARCHES: 'ADD_RECENT_SEARCHES',
     CLEAR_RECENT_SEARCHES: 'CLEAR_RECENT_SEARCHES',
@@ -53,4 +55,14 @@ export const removeResentSearch = () => ({
 
 export const clearSearch = () => ({
     type: SearchActions.CLEAR_SEARCH,
+});
+
+export const fetchManagerReviews = (managerId) => ({
+    type: SearchActions.FETCH_MANAGER_REVIEW,
+    managerId
+});
+
+export const fetchManagerReviewsSuccess = payload => ({
+    type: SearchActions.FETCH_MANAGER_REVIEW_SUCCESS,
+    ...payload,
 });

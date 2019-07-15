@@ -6,6 +6,11 @@ import ReviewManagerActions, {submitReviewSuccess} from "./ReviewManagerAction";
 function* newReviewAddition(action) {
 
     try {
+        console.log(action.data);
+        const d = action.data;
+        const request = {
+            managerId : d.managerId,
+        };
         const payload = yield call(submitNewReview, action.data);
 
         yield put(submitReviewSuccess({payload}));

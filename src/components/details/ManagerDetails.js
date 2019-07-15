@@ -1,30 +1,26 @@
 import React, {Component} from 'react';
-import {getManagerSlug, truncateText} from "../../util/CommonUtil";
+import {getManagerId, getManagerSlug, isEmpty, truncateText} from "../../util/CommonUtil";
 import {Link} from "react-router-dom";
 import PersonReviewsList from "./PersonReveiwsList";
 import RateManager from "../form/review/RateManager";
-
-const v = {
-    id: 23,
-    name: 'Ashutosh Singh',
-    designation: 'Project Engineer',
-    company: 'Wynk Ltd.',
-    location: 'DELHI',
-    totalReviews: 34,
-    averageRating: 4,
-    promotedReview: {
-        reviewer: 'Nayak Singh',
-        comments: 'Best teacher ever seen. But still, Home component is also rendered in the screen this happens ' +
-            'because of our home path is ’/’ and users path is ‘/users’ slash is same in both paths so that it' +
-            ' renders both components to stop this behavior we need to use the exact prop'
-    }
-}
+import {connect} from "react-redux";
+import {fetchManagerReviews} from "../search-bar/SearchAction";
 
 class ManagerDetails extends Component {
 
+    componentDidMount() {
+        const {match: {params}, reviewSearch, fetchManagerReviews} = this.props;
+        // const v = results.find(r => r.id === getManagerId(params.name));
+        if(isEmpty(reviewSearch)){
+            fetchManagerReviews(getManagerId(params.name));
+        }
+    }
+
     render() {
 
-        const {match: {params}} = this.props;
+        const {match: {params}, reviewSearch} = this.props;
+
+        const v = reviewSearch;
 
         const isRating = params.function === 'rate';
 
@@ -65,10 +61,10 @@ class ManagerDetails extends Component {
                                     </div>
                                 </div>
                                 <div className='mt-3'>
-                                    <small>{truncateText(v.promotedReview.comments)}</small>
+                                    {/*<small>{truncateText(v.promotedReview.comments)}</small>*/}
                                 </div>
                                 <div>
-                                    <Link to={isRating ? `${getManagerSlug(v.name)}`: this.props.location.pathname + '/rate'}>
+                                    <Link to={isRating ? `${getManagerSlug(v.name, v.id)}`: this.props.location.pathname + '/rate'}>
                                         <button className='btn h-100 rounded cmn-btn my-3' type="submit">
                                         <span className='btn-txt'>{isRating ? 'SEE REVIEWS' :'RATE THIS MANAGER'}</span>
                                     </button></Link>
@@ -79,7 +75,7 @@ class ManagerDetails extends Component {
                     <div className='col-md-8'>
                         <div className='card result-card '>
                             <div className='card-body rounded shadow-sm'>
-                                {isRating ? <RateManager/> : <PersonReviewsList/>}
+                                {isRating ? <RateManager/> : <PersonReviewsList list={v.reviews}/>}
                             </div>
                         </div>
                     </div>
@@ -89,4 +85,13 @@ class ManagerDetails extends Component {
     }
 }
 
-export default ManagerDetails;
+const mapStateToProps = (state) => {
+    const {search} = state;
+
+    return {
+        results: search.results,
+        reviewSearch: search.reviewSearch,
+    }
+};
+
+export default connect(mapStateToProps, {fetchManagerReviews})(ManagerDetails);

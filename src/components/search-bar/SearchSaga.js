@@ -1,7 +1,7 @@
 import {call, put,} from 'redux-saga/effects';
-import SearchActions, {getAllCompaniesActionSuccess} from "./SearchAction";
+import SearchActions, {fetchManagerReviewsSuccess, getAllCompaniesActionSuccess} from "./SearchAction";
 import {takeFirst} from "../../util/ReduxSagaUtil";
-import {fetchAllCompaniesApi} from "../../controller/CompanyController";
+import {fetchAllCompaniesApi, fetchAllReviewsManager} from "../../controller/CompanyController";
 
 
 function* fetchAllCompanies() {
@@ -16,6 +16,20 @@ function* fetchAllCompanies() {
     }
 }
 
+function* fetchManagerReviews(action) {
+
+    try {
+        console.log('Fetch manager called: ' ,action);
+        const payload = yield call(fetchAllReviewsManager, action.managerId);
+
+        yield put(fetchManagerReviewsSuccess({payload}));
+    }
+    catch (e) {
+        console.error(e);
+    }
+}
+
 export default [
     takeFirst(SearchActions.FETCH_ALL_COMPANIES, fetchAllCompanies),
+    takeFirst(SearchActions.FETCH_MANAGER_REVIEW, fetchManagerReviews),
 ];

@@ -9,14 +9,20 @@ export const truncateText = (val) => {
     return val;
 };
 
-
-export const getManagerSlug = (val) => {
-    return '/manager/'+ makeSlug(val);
+export const isEmpty =(obj) => {
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
+}
+export const getManagerSlug = (val, id) => {
+    return '/manager/'+ makeSlug(val, id);
 };
 
-export const makeSlug = (val) => {
+export const getManagerId = (val) => {
+    return val.split('-').slice(-1)[0];
+};
+
+export const makeSlug = (val, id) => {
     return val
         .toLowerCase()
         .replace(/[^\w ]+/g,'')
-        .replace(/ +/g,'-');
+        .replace(/ +/g,'-') + '-' + id;
 };

@@ -1,73 +1,17 @@
 import React, {Component} from 'react';
 import {getManagerSlug, truncateText} from "../../util/CommonUtil";
 import {Link} from "react-router-dom";
-
-const data = [
-    {
-        id: 23,
-        name: 'Ashutosh Singh',
-        designation: 'Project Engineer',
-        company: 'Wynk Ltd.',
-        location: 'Delhi',
-        totalReviews: 34,
-        averageRating: 4,
-        promotedReview: {
-            reviewer: 'Nayak Singh',
-            comments: 'Best teacher ever seen. But still, Home component is also rendered in the screen this happens ' +
-                'because of our home path is ’/’ and users path is ‘/users’ slash is same in both paths so that it' +
-                ' renders both components to stop this behavior we need to use the exact prop'
-        }
-    },
-    {
-        id: 22,
-        name: 'Behuda Sharma',
-        designation: 'CTO',
-        company: 'Airtel Ltd.',
-        location: 'Hyderabad',
-        totalReviews: 3,
-        averageRating: 2,
-        promotedReview: {
-            reviewer: 'Nayak Singh',
-            comments: 'Best teacher ever seen. But still, Home component is also rendered in the screen this happens ' +
-                'because of our home path is ’/’ and users path is ‘/users’ slash is same in both paths so that it' +
-                ' renders both components to stop this behavior we need to use the exact prop'
-        }
-    },
-    {
-        id: 21,
-        name: 'Nalank Singh',
-        designation: 'CEO',
-        company: 'Aas Pass Ltd.',
-        location: 'Gurugram',
-        totalReviews: 1,
-        averageRating: 5,
-        promotedReview: {
-            reviewer: 'Nayak Singh',
-            comments: 'Best teacher ever seen. But still, Home component is also rendered in the screen this happens ' +
-                'because of our home path is ’/’ and users path is ‘/users’ slash is same in both paths so that it' +
-                ' renders both components to stop this behavior we need to use the exact prop'
-        }
-    },
-    {
-        id: 20,
-        name: 'Pagal Yadav',
-        designation: 'Manager',
-        company: 'Champu Champ Technologies.',
-        location: 'Gaon',
-        totalReviews: 12,
-        averageRating: 2,
-        promotedReview: {
-            reviewer: 'Nayak Singh',
-            comments: 'Best teacher ever seen. But still, Home component is also rendered in the screen this happens ' +
-                'because of our home path is ’/’ and users path is ‘/users’ slash is same in both paths so that it' +
-                ' renders both components to stop this behavior we need to use the exact prop'
-        }
-    },
-]
+import {connect} from "react-redux";
 
 class SearchResults extends Component {
 
     render() {
+        const {results} = this.props;
+
+        if(!results){
+            return null;
+        }
+
         return (
             <>
                 <div className='h4 text-muted mt-2'><span>Search Results For - </span>
@@ -76,13 +20,13 @@ class SearchResults extends Component {
                     <Link to='add'><span className='h6 floral-color'>Add A Manager</span></Link>
                 </div>
                 <div className='row flex-row'>
-                    {data.map(v => (
+                    {results.map(v => (
                             <div className='col-md-4' key={v.id}>
                                 <div className='card result-card '>
                                     <div className='card-body rounded shadow-sm'>
                                         <div className='card-title'>
                                             <span className='font-weight-bolder'>
-                                            <Link to={getManagerSlug(v.name)}>{v.name}</Link>
+                                            <Link to={getManagerSlug(v.name, v.id)}>{v.name}</Link>
                                             </span>
                                         </div>
                                         <div className='card-subtitle small'><span>{v.designation} @ </span>
@@ -123,4 +67,12 @@ class SearchResults extends Component {
     }
 }
 
-export default SearchResults;
+const mapStateToProps = (state) => {
+    const {search} = state;
+
+    return {
+        results: search.results
+    }
+};
+
+export default connect(mapStateToProps)(SearchResults);

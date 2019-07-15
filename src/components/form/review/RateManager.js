@@ -67,10 +67,10 @@ class RateManager extends Component {
                     </div>
                     <div className='row form-group'>
                         <label className='col h-100  text-muted' htmlFor="formCompanyCity">
-                            6. Micro Managing
+                            6. Effective Communication
                         </label>
                         <div className='col-md-8'>
-                            <LabelRating labels={REVIEW_LABEL_TYPES.LABEL2} name='micro-managing'/>
+                            <LabelRating labels={REVIEW_LABEL_TYPES.LABEL2} name='communication'/>
                         </div>
                     </div>
                     <div className='row form-group'>
