@@ -1,23 +1,23 @@
 import React from "react";
 
-// const data = [
-//     {
-//         id: 1,
-//         name: 'Ashutosh Singh',
-//         notHelpful: 2,
-//         helpful: 1,
-//         postedOn: '11-02-1992',
-//         rating: 4,
-//         review: {
-//             Skills: 'Excellent',
-//             Behaviour: 'Calm',
-//             WillRecommend: 'Yes'
-//         },
-//         comments: 'Best teacher ever seen. But still, Home component is also rendered in the screen this happens ' +
-//             'because of our home path is ’/’ and users path is ‘/users’ slash is same in both paths so that it' +
-//             ' renders both components to stop this behavior we need to use the exact prop'
-//     }
-// ];
+const data = [
+    {
+        id: 1,
+        name: 'Ashutosh Singh',
+        notHelpful: 2,
+        helpful: 1,
+        postedOn: '11-02-1992',
+        rating: 4,
+        feedback: {
+            Skills: 'Excellent',
+            Behaviour: 'Calm',
+            WillRecommend: 'Yes'
+        },
+        comments: 'Best teacher ever seen. But still, Home component is also rendered in the screen this happens ' +
+            'because of our home path is ’/’ and users path is ‘/users’ slash is same in both paths so that it' +
+            ' renders both components to stop this behavior we need to use the exact prop'
+    }
+];
 
 const PersonReviewsList = ({list}) => {
     const data = list;
@@ -37,24 +37,24 @@ const PersonReviewsList = ({list}) => {
                         <span className='small font-weight-bold'>{val.name} </span>
                         <span className='mx-2'>
                                             {
-                                                Array.from({length: val.rating}, (item, index) => (
+                                                Array.from({length: val.overallRating}, (item, index) => (
                                                     <span className="fa fa-star orange-color" data-rating={index + 1}
                                                           key={index}/>
                                                 ))
                                             }
                             {
-                                Array.from({length: 5 - val.rating}, (item, index) => (
+                                Array.from({length: 5 - val.overallRating}, (item, index) => (
                                     <span className="fa fa-star text-muted"
-                                          data-rating={val.rating + index + 1} key={index}/>
+                                          data-rating={val.overallRating + index + 1} key={index}/>
                                 ))
                             }</span>
                         |
                         <span className='small text-muted mx-2'>Posted On - {val.postedOn}</span>
                         <p className='text-muted small'>{val.comments}</p>
                         <div className='mb-2'>
-                            {Object.keys(val.review).map(function (re) {
+                            {Object.keys(val.feedback).map(function (re) {
                                 return <div className='small' key={re}><span
-                                    className='font-weight-bold'>{re}</span> - <span>{val.review[re]}</span>
+                                    className='font-weight-bold text-capitalize'>{re}</span> - <span>{val.feedback[re]}</span>
                                 </div>
                             })}
                         </div>

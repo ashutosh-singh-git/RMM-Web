@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
-import {getManagerSlug, truncateText} from "../../util/CommonUtil";
+import {getManagerSlug, getUrlParameter, truncateText} from "../../util/CommonUtil";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
+import {getSearchResult} from "../search-bar/SearchAction";
 
 class SearchResults extends Component {
+
+    componentDidMount() {
+        const {getSearchResult} = this.props;
+        const ci = getUrlParameter('ci');
+        const mn = getUrlParameter('mn');
+        getSearchResult(ci,mn);
+        console.log(ci, mn);
+    }
 
     render() {
         const {results} = this.props;
@@ -12,6 +21,7 @@ class SearchResults extends Component {
             return null;
         }
 
+        console.log('Results: ',results);
         return (
             <>
                 <div className='h4 text-muted mt-2'><span>Search Results For - </span>
@@ -26,13 +36,13 @@ class SearchResults extends Component {
                                     <div className='card-body rounded shadow-sm'>
                                         <div className='card-title'>
                                             <span className='font-weight-bolder'>
-                                            <Link to={getManagerSlug(v.name, v.id)}>{v.name}</Link>
+                                            <Link to={getManagerSlug(v.managerName, v.id)}>{v.managerName}</Link>
                                             </span>
                                         </div>
                                         <div className='card-subtitle small'><span>{v.designation} @ </span>
-                                            <span className='floral-color font-weight-bold'>{v.company}</span>
+                                            <span className='floral-color font-weight-bold'>{v.companyName}</span>
                                         </div>
-                                        <div className='h6 text-muted'>{v.location}</div>
+                                        <div className='h6 text-muted'>{v.city}</div>
                                         <div className='row mt-3'>
                                             <div className='col-md-4'>
                                                 {
@@ -53,8 +63,8 @@ class SearchResults extends Component {
                                         </div>
                                         <div className='mt-3'>
                                             <div><i className="fa fa-quote-left" style={{opacity: 0.3}}/></div>
-                                            <small>{truncateText(v.promotedReview.comments)}</small>
-                                            <footer className="blockquote-footer">{v.promotedReview.reviewer}</footer>
+                                            {/*<small>{truncateText(v.promotedReview.comments)}</small>*/}
+                                            {/*<footer className="blockquote-footer">{v.promotedReview.reviewer}</footer>*/}
                                         </div>
                                     </div>
                                 </div>
@@ -75,4 +85,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(SearchResults);
+export default connect(mapStateToProps, {getSearchResult})(SearchResults);

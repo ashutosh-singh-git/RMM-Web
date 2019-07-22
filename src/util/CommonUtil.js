@@ -11,7 +11,15 @@ export const truncateText = (val) => {
 
 export const isEmpty =(obj) => {
     return Object.keys(obj).length === 0 && obj.constructor === Object;
-}
+};
+
+export const getUrlParameter = (name) => {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    let results = regex.exec(window.location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
 export const getManagerSlug = (val, id) => {
     return '/manager/'+ makeSlug(val, id);
 };

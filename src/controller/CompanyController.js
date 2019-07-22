@@ -1,7 +1,7 @@
 import {CommonConfig} from "../config/CommonConfig";
 import RequestUtil from "../util/RequestUtil";
 
-const { CompanyAll, ManagerReviewSearch } = CommonConfig;
+const { CompanyAll, ManagerReviewSearch, ManagerSearch } = CommonConfig;
 
 export const fetchAllCompaniesApi = () => RequestUtil.GET({
     url: `${CompanyAll}`,
@@ -17,6 +17,13 @@ export const fetchAllReviewsManager = (managerId) => RequestUtil.GET({
 
     headers: {
         'Content-Type': 'application/json',
-        'x-atv-did': 'sd',
+    },
+});
+
+export const managerSearch = (ci, mn) => RequestUtil.GET({
+    url: `${ManagerSearch}?companyId=${ci}&managerName=${mn}`,
+
+    headers: {
+        'Content-Type': 'application/json',
     },
 });

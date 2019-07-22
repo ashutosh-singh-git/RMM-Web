@@ -24,9 +24,10 @@ export const getAllCompaniesActionSuccess = payload => ({
     ...payload
 });
 
-export const getSearchResult = payload => ({
+export const getSearchResult = (ci,mn) => ({
     type: SearchActions.FETCH_SEARCH,
-    ...payload,
+    ci,
+    mn
 });
 
 export const getPaginatedSearchResultSuccess = payload => ({

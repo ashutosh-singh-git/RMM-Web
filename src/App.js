@@ -20,7 +20,7 @@ class App extends Component {
                             <Route path='/add' component={ReviewForm}/>
                             <Route path='/manager/:name/:function?' component={ManagerDetails}/>
                             <Route path='/manager/:name/:function?/rate' component={ManagerDetails}/>
-                            <Route path='/results' component={SearchResults}/>
+                            <Route path='/search' component={SearchResults}/>
                         </Switch>
                     </div>
                 </main>

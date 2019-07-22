@@ -35,7 +35,7 @@ class ManagerDetails extends Component {
                             <div className='card-body rounded shadow-sm'>
                                 <div className='card-title h4'>
                                             <span className='font-weight-bolder'>
-                                            {v.name}
+                                            {v.managerName}
                                             </span>
                                 </div>
                                 <div className='card-subtitle small'><span>{v.designation} @ </span>
@@ -64,7 +64,7 @@ class ManagerDetails extends Component {
                                     {/*<small>{truncateText(v.promotedReview.comments)}</small>*/}
                                 </div>
                                 <div>
-                                    <Link to={isRating ? `${getManagerSlug(v.name, v.id)}`: this.props.location.pathname + '/rate'}>
+                                    <Link to={isRating ? `${getManagerSlug(v.managerName, v.id)}`: this.props.location.pathname + '/rate'}>
                                         <button className='btn h-100 rounded cmn-btn my-3' type="submit">
                                         <span className='btn-txt'>{isRating ? 'SEE REVIEWS' :'RATE THIS MANAGER'}</span>
                                     </button></Link>
