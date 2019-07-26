@@ -8,10 +8,11 @@ class LabelRating extends Component {
         super(props);
 
         this.state = {
-            active: 2
+            active: null
         };
-        const {name, reviewFormUpdate} = props;
-        reviewFormUpdate({key: name, value: 3});
+        //Removing Default Checked
+        // const {name, reviewFormUpdate} = props;
+        // reviewFormUpdate({key: name, value: 3});
     }
 
     labelClicked = (index) => {

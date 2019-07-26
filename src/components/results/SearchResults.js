@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {getManagerSlug, getUrlParameter, truncateText} from "../../util/CommonUtil";
+import {getDesignation, getManagerSlug, getUrlParameter, truncateText} from "../../util/CommonUtil";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {getSearchResult} from "../search-bar/SearchAction";
@@ -10,22 +10,26 @@ class SearchResults extends Component {
         const {getSearchResult} = this.props;
         const ci = getUrlParameter('ci');
         const mn = getUrlParameter('mn');
-        getSearchResult(ci,mn);
+        getSearchResult(ci, mn);
         console.log(ci, mn);
     }
 
     render() {
         const {results} = this.props;
 
-        if(!results){
-            return null;
+        if (!results || results.length < 1) {
+            return (
+                <div className='h4 text-muted mt-2'><span>No Search Results Found For - </span>
+                    <span className='font-weight-bolder'>{getUrlParameter('mn')}</span> ||&nbsp;
+                    <Link to='add'><span className='h6 floral-color'>Add A Manager</span></Link>
+                </div>
+            );
         }
 
-        console.log('Results: ',results);
         return (
             <>
                 <div className='h4 text-muted mt-2'><span>Search Results For - </span>
-                    <span className='font-weight-bolder'>Allen</span> || <span
+                    <span className='font-weight-bolder'>{getUrlParameter('mn')}</span> || <span
                         className='h6'>Couldn't see the manager </span>
                     <Link to='add'><span className='h6 floral-color'>Add A Manager</span></Link>
                 </div>
@@ -39,7 +43,7 @@ class SearchResults extends Component {
                                             <Link to={getManagerSlug(v.managerName, v.id)}>{v.managerName}</Link>
                                             </span>
                                         </div>
-                                        <div className='card-subtitle small'><span>{v.designation} @ </span>
+                                        <div className='card-subtitle small'><span>{getDesignation(v.designation)} @ </span>
                                             <span className='floral-color font-weight-bold'>{v.companyName}</span>
                                         </div>
                                         <div className='h6 text-muted'>{v.city}</div>
@@ -47,25 +51,39 @@ class SearchResults extends Component {
                                             <div className='col-md-4'>
                                                 {
                                                     Array.from({length: v.averageRating}, (item, index) => (
-                                                        <span className="fa fa-star orange-color" data-rating={index + 1}
+                                                        <span className="fa fa-star orange-color"
+                                                              data-rating={index + 1}
                                                               key={index}/>
                                                     ))
                                                 }
                                                 {
                                                     Array.from({length: 5 - v.averageRating}, (item, index) => (
                                                         <span className="fa fa-star text-muted"
-                                                              data-rating={v.averageRating + index + 1} key={index}/>
+                                                              data-rating={v.averageRating + index + 1}
+                                                              key={index}/>
                                                     ))
                                                 }</div>
                                             <div className='col-md-4'>
                                                 <small className='orange-color'>{v.totalReviews} RATINGS</small>
                                             </div>
                                         </div>
-                                        <div className='mt-3'>
-                                            <div><i className="fa fa-quote-left" style={{opacity: 0.3}}/></div>
-                                            {/*<small>{truncateText(v.promotedReview.comments)}</small>*/}
-                                            {/*<footer className="blockquote-footer">{v.promotedReview.reviewer}</footer>*/}
-                                        </div>
+                                        {v.totalReviews > 0 && v.promotedReview.comments ?
+                                            <div className='mt-3'>
+                                                <div><i className="fa fa-quote-left" style={{opacity: 0.3}}/></div>
+                                                <small>{truncateText(v.promotedReview.comments)}</small>
+                                                <footer
+                                                    className="blockquote-footer">{v.promotedReview.reviewer}</footer>
+                                            </div>
+                                            :
+                                            <div className='mt-3'>
+                                                <span className='text-muted'>No reviews for this manager yet </span>
+                                                <Link to={`${getManagerSlug(v.managerName, v.id)}/rate`}>
+                                                    <button className='btn h-100 rounded cmn-btn my-3' type="submit">
+                                                        <span className='btn-txt'>{'RATE THIS MANAGER'}</span>
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>

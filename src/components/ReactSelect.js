@@ -13,7 +13,7 @@ class ReactSelect extends Component {
 
     handleInputChange = (query, {action}) => {
         const {handleOnChange} = this.props;
-        console.log(action, query);
+
         if (action === "input-change") {
             handleOnChange({value: 1000, label: query});
             this.setState({
@@ -32,7 +32,6 @@ class ReactSelect extends Component {
 
     handleChange = (pro) => {
         const {handleOnChange} = this.props;
-        console.log('handleChange', pro);
         handleOnChange(pro);
         this.setState({
             openMenu: false

@@ -7,11 +7,16 @@ function* newReviewAddition(action) {
 
     try {
         console.log(action.data);
-        // const d = action.data;
-        // const request = {
-        //     managerId : d.managerId,
-        // };
-        const payload = yield call(submitNewReview, action.data);
+        const d = action.data;
+        const request = {
+            managerId : d.managerId,
+            isRecommended: d.recommend,
+            comments: d.comments,
+            name: d.name,
+            overallRating: d.overall,
+            feedback: d
+        };
+        const payload = yield call(submitNewReview, request);
 
         yield put(submitReviewSuccess({payload}));
     }

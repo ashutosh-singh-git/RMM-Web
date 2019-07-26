@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import connect from "react-redux/src/connect/connect";
-import {getAllCompaniesAction} from "./SearchAction";
+import {getAllCompaniesAction, getSearchResult} from "./SearchAction";
 import ReactSelect from "../ReactSelect";
+import {Link, withRouter} from "react-router-dom";
 
 class SearchBar extends Component {
 
@@ -18,8 +19,13 @@ class SearchBar extends Component {
 
     onSearchSubmit = (e) => {
         const {managerValue, companyValue} = this.state;
-        console.log(managerValue, companyValue);
+        const {getSearchResult, history} = this.props;
+        const ci = companyValue.value;
+        const mn = managerValue.label;
+        console.log(mn, ci);
         e.preventDefault();
+        history.push(`/search?ci=${ci}&mn=${mn}`);
+        getSearchResult(ci, mn);
     };
 
     componentDidMount() {
@@ -50,7 +56,7 @@ class SearchBar extends Component {
     updateManagerValue = (value) => {
         console.log('manager',value);
         this.setState({
-            mangerValue: value
+            managerValue: value
         })
     };
 
@@ -65,7 +71,7 @@ class SearchBar extends Component {
                     <div className="search-bar">
                         <div className='row'>
                             <div className='col-2'>
-                                <a className="navbar-brand" href="/"><span className='logo'>Manager Review</span></a>
+                                <Link className="navbar-brand" to="/"><span className='logo'>Manager Review</span></Link>
                             </div>
                             <div className='col-8'>
                                 <div className='row'>
@@ -113,4 +119,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, {getAllCompaniesAction})(SearchBar);
+export default withRouter(connect(mapStateToProps, {getAllCompaniesAction, getSearchResult})(SearchBar));

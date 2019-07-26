@@ -3,17 +3,7 @@ import connect from "react-redux/src/connect/connect";
 import ReactSelect from "../../ReactSelect";
 import Select from "react-select";
 import {submitNewManagerAction} from "./AddManagerAction";
-
-const genderOptions = [
-    {value: 0, label: 'Mr'},
-    {value: 1, label: 'Miss'},
-];
-
-const desOptions = [
-    {value: 0, label: 'Project Manager'},
-    {value: 1, label: 'Technical Lead'},
-    {value: 2, label: 'Other'},
-];
+import {DESIGNATIONS, GENDERS} from "../../../util/CommonUtil";
 
 class AddManager extends Component {
 
@@ -51,6 +41,7 @@ class AddManager extends Component {
         const form = e.target;
         const {companyValue} = this.state;
 
+        console.log(companyValue);
         if (!companyValue) {
             alert('company name is required');
             return;
@@ -58,6 +49,7 @@ class AddManager extends Component {
         let data = {
             city: form.city.value,
             companyName: companyValue.label,
+            companyId: companyValue.value !== 1000 ? companyValue.value : '',
             designation: form.designation.value,
             gender: form.gender.value,
             managerName: form.manager.value
@@ -83,8 +75,8 @@ class AddManager extends Component {
                             </label>
                             <div className='col-sm-2'>
                                 <Select name={'gender'}
-                                        options={genderOptions}
-                                        defaultValue={genderOptions[0]}
+                                        options={GENDERS}
+                                        defaultValue={GENDERS[0]}
                                         id='formManagerName'
                                 />
                             </div>
@@ -98,8 +90,8 @@ class AddManager extends Component {
                             </label>
                             <div className='col-sm-10'>
                                 <Select name={'designation'}
-                                        options={desOptions}
-                                        defaultValue={desOptions[0]}
+                                        options={DESIGNATIONS}
+                                        defaultValue={DESIGNATIONS[0]}
                                         id='formProjectManager'
                                 />
                             </div>

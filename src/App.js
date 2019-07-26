@@ -6,7 +6,6 @@ import ManagerDetails from "./components/details/ManagerDetails";
 import {Route, Switch} from "react-router-dom";
 import SearchResults from "./components/results/SearchResults";
 
-
 class App extends Component {
 
     render() {

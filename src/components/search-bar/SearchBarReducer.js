@@ -2,23 +2,7 @@ import SearchActions from "./SearchAction";
 
 const initialState = {
     companies: [],
-    results: [
-        {
-            id: '23',
-            managerName: 'Ashutosh Singh',
-            designation: 'Project Engineer',
-            company: 'Wynk Ltd.',
-            location: 'Delhi',
-            totalReviews: 34,
-            averageRating: 4,
-            promotedReview: {
-                reviewer: 'Nayak Singh',
-                comments: 'Best teacher ever seen. But still, Home component is also rendered in the screen this happens ' +
-                    'because of our home path is ’/’ and users path is ‘/users’ slash is same in both paths so that it' +
-                    ' renders both components to stop this behavior we need to use the exact prop'
-            }
-        }
-    ],
+    results: [],
     reviewSearch: {}
 };
 

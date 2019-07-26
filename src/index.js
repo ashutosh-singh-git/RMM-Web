@@ -8,6 +8,7 @@ import reducers from "./redux/Reducers";
 import sagas from "./redux/Sagas";
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
+import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 
 
 const sagaMiddleware = createSagaMiddleware();
@@ -22,7 +23,9 @@ sagaMiddleware.run(sagas);
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <App/>
+            <GoogleReCaptchaProvider reCaptchaKey="6LdLpq8UAAAAAICj9l8ex5bX3IbuQ0GF1NkfzifA">
+                <App/>
+            </GoogleReCaptchaProvider>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')

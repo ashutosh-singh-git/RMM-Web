@@ -8,10 +8,11 @@ class TenRating extends Component {
         super(props);
 
         this.state = {
-            active: 5
+            active: null
         };
-        const {name, reviewFormUpdate} = props;
-        reviewFormUpdate({key: name, value: 5});
+        // Removing Default Checked
+        // const {name, reviewFormUpdate} = props;
+        // reviewFormUpdate({key: name, value: 5});
     }
 
     labelClicked = (index) => {
