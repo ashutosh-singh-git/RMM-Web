@@ -7,18 +7,41 @@ import {connect} from "react-redux";
 import {reviewFormUpdate, submitNewReviewAction} from "./ReviewManagerAction";
 import {GoogleReCaptcha} from 'react-google-recaptcha-v3';
 import Select from "react-select";
+import {createFingerPrint, verifyRMap} from "../../../util/CommonUtil";
+import {withRouter} from "react-router-dom";
+import SuccessPage from "../../SuccessPage";
 
 class RateManager extends Component {
 
     constructor(props) {
         super(props);
         this.buttonRef = React.createRef();
+
+        this.fingerprint = null;
+        this.state = {
+            errorText: null
+        }
     }
+
+    async componentDidMount() {
+        this.fingerprint = await createFingerPrint();
+    }
+
+    // componentDidUpdate(prevProps, prevState) {
+    //     const {submitSuccess, history, submittedReviewId} = this.props;
+    //     if (submitSuccess) {
+    //         history.push(`/review/success?ri=${submittedReviewId}`);
+    //     }
+    // }
 
     handleSubmit = (e) => {
         e.preventDefault();
         const {rMap, submitNewReviewAction} = this.props;
-        submitNewReviewAction(rMap);
+        if (verifyRMap(rMap)) {
+            submitNewReviewAction(rMap);
+        } else {
+            this.setState({errorText: 'Please fill all the required fields'})
+        }
     };
 
     handleComments = (e) => {
@@ -31,81 +54,96 @@ class RateManager extends Component {
         this.buttonRef.current.disabled = false;
     };
 
+    handleExperienceChange = (event) => {
+        const {reviewFormUpdate} = this.props;
+        reviewFormUpdate({key: 'reviewerExperience', value: event.label});
+        reviewFormUpdate({key: 'fingerprint', value: this.fingerprint});
+    };
+
     render() {
+
+        const {errorText} = this.state;
+        const {submitSuccess, submitMsg, openPopUp} = this.props;
+
+        if(openPopUp) {
+            return (
+                <SuccessPage message={submitMsg} success={submitSuccess}/>
+            )
+        }
 
         return (
             <div>
                 <p className='font-weight-bolder h5 text-muted mb-3'>Rate This Manager</p>
                 <form onSubmit={this.handleSubmit}>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formManagerName">
-                            Rate Your Manager
+                    <div className='row form-group my-4'>
+                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formManagerName">
+                            Rate Your Manager<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8'>
-                            <TenRating name={'overall'}/>
+                        <div className='col-md-8 my-auto'>
+                            <TenRating name={'overallRating'}/>
                         </div>
                     </div>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formProjectManager">
-                            Skills
+                    <div className='row form-group my-4'>
+                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formProjectManager">
+                            Skills<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8'>
+                        <div className='col-md-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL1} name='skills'/>
                         </div>
                     </div>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formPlaintextEmail">
-                            Behaviour
+                    <div className='row form-group my-4'>
+                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formPlaintextEmail">
+                            Behaviour<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8'>
+                        <div className='col-md-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL2} name='behaviour'/>
                         </div>
                     </div>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formKnowledge">
-                            Knowledge
+                    <div className='row form-group my-4'>
+                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formKnowledge">
+                            Knowledge<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8'>
+                        <div className='col-md-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL1} name='knowledge'/>
                         </div>
                     </div>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formCompanyCity">
-                            Transparency
+                    <div className='row form-group my-4'>
+                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formCompanyCity">
+                            Transparency<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8'>
+                        <div className='col-md-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL2} name='transparency'/>
                         </div>
                     </div>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formCompanyCity">
-                            Effective Communication
+                    <div className='row form-group my-4'>
+                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formCompanyCity">
+                            Effective Communication<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8'>
+                        <div className='col-md-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL2} name='communication'/>
                         </div>
                     </div>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formCompanyCity">
-                            Leadership Skills
+                    <div className='row form-group  my-4'>
+                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formCompanyCity">
+                            Leadership Skills<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8'>
+                        <div className='col-md-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL1} name='leadership'/>
                         </div>
                     </div>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formRecommend">
-                            Would You Recommend
+                    <div className='row form-group my-3'>
+                        <label className='col h-100 text-muted font-weight-bolder' htmlFor="formRecommend">
+                            Would You Recommend<span className='orange-color'>*</span>
                         </label>
                         <div className='col-md-8'>
-                            <RadioRating name='recommend'/>
+                            <RadioRating name='isRecommended'/>
                         </div>
                     </div>
                     <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formComments">
+                        <label className='col h-100 text-muted font-weight-bolder' htmlFor="formComments">
                             Comments (if any)
                         </label>
-                        <div className='col-md-8'>
+                        <div className='col-md-8 my-auto'>
                             <textarea className='form-input form-control' onChange={this.handleComments}
                                       name={'comments'} rows={3} id='formComments'
                                       placeholder="Add a Comment..."/>
@@ -113,45 +151,47 @@ class RateManager extends Component {
                     </div>
                     <GoogleReCaptcha onVerify={this.verifyCallback}/>
                     <p className='font-weight-bolder h5 text-muted mt-4 mb-3'>Tell Us Something About You</p>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formExperience">
-                            Industry Experience
+                    <div className='row form-group my-4'>
+                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formExperience">
+                            Industry Experience<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8'>
-                            <Select name={'experience'}
+                        <div className='col-md-8 my-auto'>
+                            <Select name={'reviewerExperience'}
                                     className={'w-25'}
                                     options={EXPERIENCE}
                                     autoSize={true}
                                     required
                                     id='formExperience'
+                                    onChange={this.handleExperienceChange}
                             />
                         </div>
                     </div>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formRelation">
-                            Working Relation
+                    <div className='row form-group my-4'>
+                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formRelation">
+                            Working Relation<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8'>
-                            <LabelRating labels={REVIEW_LABEL_TYPES.LABEL3} name='relation'/>
+                        <div className='col-md-8 my-auto'>
+                            <LabelRating labels={REVIEW_LABEL_TYPES.LABEL3} name='reviewerRelation'/>
                         </div>
                     </div>
-                    <div className='row form-group'>
-                        <label className='col h-100  text-muted font-weight-bolder' htmlFor="formName">
+                    <div className='row form-group my-4'>
+                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formName">
                             Visible Name
                         </label>
-                        <div className='col-md-8'>
+                        <div className='col-md-8 my-auto'>
                             <input className='form-input' type={'text'} placeholder={'Anonymous'} name='name'/>
                         </div>
                     </div>
-                    <div className='col my-4'>
-                        <button className='btn h-100 rounded cmn-btn add-btn' disabled ref={this.buttonRef}
-                                type="submit">
-                            <span className='btn-txt'>SUBMIT</span>
-                        </button>
+                    <div className='row my-4'>
+                        <div className='col'>
+                            {errorText ? <span className='text-danger small'>* {errorText}</span> : null}
+                            <button className='btn h-100 rounded cmn-btn add-btn' disabled ref={this.buttonRef}
+                                    type="submit">
+                                <span className='btn-txt'>SUBMIT</span>
+                            </button>
+                        </div>
                     </div>
-
                 </form>
-
             </div>
         );
     }
@@ -161,8 +201,12 @@ const mapStateToProps = (state) => {
     const {review} = state;
 
     return {
-        rMap: review.rMap
+        rMap: review.rMap,
+        submitSuccess: review.submitSuccess,
+        submittedReviewId: review.submittedReviewId,
+        submitMsg: review.submitMsg,
+        openPopUp: review.openPopUp
     }
 };
 
-export default connect(mapStateToProps, {reviewFormUpdate, submitNewReviewAction})(RateManager);
+export default withRouter(connect(mapStateToProps, {reviewFormUpdate, submitNewReviewAction})(RateManager));

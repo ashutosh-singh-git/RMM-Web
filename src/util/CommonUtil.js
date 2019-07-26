@@ -1,3 +1,5 @@
+import {DESIGNATION_VALUE} from "../config/CommonConfig";
+import Fingerprint2 from 'fingerprintjs2';
 
 const COMMENT_TEXT = 200;
 
@@ -7,6 +9,27 @@ export const truncateText = (val) => {
         return value+'...';
     }
     return val;
+};
+
+let privateFingerPrintHolder = null;
+export const createFingerPrint = async () => {
+    if (privateFingerPrintHolder) {
+        return Promise.resolve(privateFingerPrintHolder);
+    }
+
+    return new Promise((resolve, reject) => {
+        try {
+            Fingerprint2.get((components) => {
+                const values = components.map(component => component.value);
+                const murmur = Fingerprint2.x64hash128(values.join(''), 31);
+                privateFingerPrintHolder = murmur;
+                resolve(murmur);
+            });
+        }
+        catch (error) {
+            reject(error);
+        }
+    });
 };
 
 export const isEmpty =(obj) => {
@@ -35,26 +58,47 @@ export const makeSlug = (val, id) => {
         .replace(/ +/g,'-') + '-' + id;
 };
 
-export const GENDERS = [
-    {value: 0, label: 'Mr'},
-    {value: 1, label: 'Miss'},
-];
+export const rateFormKeys = {
+    overallRating: (val) => !isNaN(val) && val > 0 && val < 11,
+    isRecommended: (val) => val !== null,
+    behaviour: (val) => !isNaN(val) && val > 0 && val < 6,
+    knowledge: (val) => !isNaN(val) && val > 0 && val < 6,
+    skills: (val) => !isNaN(val) && val > 0 && val < 6,
+    leadership: (val) => !isNaN(val) && val > 0 && val < 6,
+    transparency: (val) => !isNaN(val) && val > 0 && val < 6,
+    communication: (val) => !isNaN(val) && val > 0 && val < 6,
+    reviewerExperience: (val) => val !== undefined && !isEmpty(val),
+    reviewerRelation: (val) => !isNaN(val) && val > 0 && val < 4,
+};
 
-export const DESIGNATIONS = [
-    {value: 0, label: 'Project Manager'},
-    {value: 1, label: 'Technical Lead'},
-    {value: 2, label: 'Other'},
-];
+export const verifyRMap = (map) => {
+    console.log(map);
+    let errors = Object.keys(rateFormKeys).map(function (property) {
+        let validator = rateFormKeys[property];
 
-const DESIGNATION_VALUE = {
-    PROJECT_MANAGER: 'Project Manager',
-    TECH_LEAD: 'Technical Lead',
-    OTHER: 'Other'
+        return [property, validator(map[property])];
+    }).reduce(function (errors, pair) {
+        if (pair[1] === false) {
+            errors.push(new Error(pair[0] + " is invalid."));
+        }
+
+        return errors;
+    }, []);
+
+    if (errors.length > 0) {
+        errors.forEach(function (error) {
+            console.log(error.message);
+        });
+        return false
+    } else {
+        console.log("info is valid");
+        return true;
+    }
 };
 
 export const getDesignation = (value) => {
     return DESIGNATION_VALUE[value] ? DESIGNATION_VALUE[value] : DESIGNATION_VALUE.OTHER
-}
+};
 
 export const formatDate = (date) => {
     const monthNames = [
@@ -69,4 +113,4 @@ export const formatDate = (date) => {
     const year = date.getFullYear();
 
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
-}
+};

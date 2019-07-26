@@ -37,6 +37,23 @@ export const EXPERIENCE = [
     {value: 3, label: '>10 yrs'},
 ];
 
+export const GENDERS = [
+    {value: 0, label: 'Mr'},
+    {value: 1, label: 'Miss'},
+];
+
+export const DESIGNATIONS = [
+    {value: 0, label: 'Project Manager'},
+    {value: 1, label: 'Technical Lead'},
+    {value: 2, label: 'Other'},
+];
+
+export const DESIGNATION_VALUE = {
+    PROJECT_MANAGER: 'Project Manager',
+    TECH_LEAD: 'Technical Lead',
+    OTHER: 'Other'
+};
+
 export const FEEDBACK_OPTIONS = {
     SKILLS: 'Skills',
     BEHAVIOUR: 'Behaviour',

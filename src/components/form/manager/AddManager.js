@@ -3,7 +3,7 @@ import connect from "react-redux/src/connect/connect";
 import ReactSelect from "../../ReactSelect";
 import Select from "react-select";
 import {submitNewManagerAction} from "./AddManagerAction";
-import {DESIGNATIONS, GENDERS} from "../../../util/CommonUtil";
+import {DESIGNATIONS, GENDERS} from "../../../config/CommonConfig";
 
 class AddManager extends Component {
 
@@ -56,7 +56,6 @@ class AddManager extends Component {
         };
         this.props.submitNewManagerAction(data);
     };
-
 
     render() {
 

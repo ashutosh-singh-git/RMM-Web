@@ -21,7 +21,7 @@ class SearchBar extends Component {
         const {managerValue, companyValue} = this.state;
         const {getSearchResult, history} = this.props;
         const ci = companyValue.value;
-        const mn = managerValue.label;
+        const mn = managerValue.label ? managerValue.label : '';
         console.log(mn, ci);
         e.preventDefault();
         history.push(`/search?ci=${ci}&mn=${mn}`);
@@ -80,6 +80,7 @@ class SearchBar extends Component {
                                                      placeholder='Manager'
                                                      value={managerValue}
                                                      handleOnChange={this.updateManagerValue}
+                                                     className='text-dark'
                                         />
                                     </div>
                                     <div className='col-5'>
@@ -87,6 +88,7 @@ class SearchBar extends Component {
                                                      placeholder='Company'
                                                      value={companyValue}
                                                      handleOnChange={this.updateCompanyValue}
+                                                     className='text-dark'
                                         />
                                     </div>
                                     <div className='col-2 mx-auto'>

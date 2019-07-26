@@ -16,7 +16,7 @@ class SearchResults extends Component {
 
     render() {
         const {results} = this.props;
-
+        const mn = getUrlParameter('mn');
         if (!results || results.length < 1) {
             return (
                 <div className='h4 text-muted mt-2'><span>No Search Results Found For - </span>
@@ -29,7 +29,7 @@ class SearchResults extends Component {
         return (
             <>
                 <div className='h4 text-muted mt-2'><span>Search Results For - </span>
-                    <span className='font-weight-bolder'>{getUrlParameter('mn')}</span> || <span
+                    <span className='font-weight-bolder'>{mn ? mn : 'Company'}</span> || <span
                         className='h6'>Couldn't see the manager </span>
                     <Link to='add'><span className='h6 floral-color'>Add A Manager</span></Link>
                 </div>
@@ -67,7 +67,7 @@ class SearchResults extends Component {
                                                 <small className='orange-color'>{v.totalReviews} RATINGS</small>
                                             </div>
                                         </div>
-                                        {v.totalReviews > 0 && v.promotedReview.comments ?
+                                        {v.totalReviews > 0 && v.promotedReview && v.promotedReview.comments ?
                                             <div className='mt-3'>
                                                 <div><i className="fa fa-quote-left" style={{opacity: 0.3}}/></div>
                                                 <small>{truncateText(v.promotedReview.comments)}</small>

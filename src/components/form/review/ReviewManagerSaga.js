@@ -1,7 +1,7 @@
 import {call, put,} from 'redux-saga/effects';
 import {takeFirst} from "../../../util/ReduxSagaUtil";
 import {submitNewReview} from "../../../controller/ReviewController";
-import ReviewManagerActions, {submitReviewSuccess} from "./ReviewManagerAction";
+import ReviewManagerActions, {submitReviewFailure, submitReviewSuccess} from "./ReviewManagerAction";
 
 function* newReviewAddition(action) {
 
@@ -10,18 +10,25 @@ function* newReviewAddition(action) {
         const d = action.data;
         const request = {
             managerId : d.managerId,
-            isRecommended: d.recommend,
+            isRecommended: d.isRecommended,
             comments: d.comments,
-            name: d.name,
-            overallRating: d.overall,
-            feedback: d
+            name: d.name ? d.name : 'Anonymous',
+            overallRating: d.overallRating,
+            feedback: d,
+            reviewerRelation: d.reviewerRelation,
+            reviewerExperience: d.reviewerExperience,
+            fingerprint: d.fingerprint,
         };
         const payload = yield call(submitNewReview, request);
 
+        console.log(payload);
         yield put(submitReviewSuccess({payload}));
     }
     catch (e) {
-        console.error(e);
+        if(e.status === 400){
+            const {message} = e.data;
+            yield put(submitReviewFailure({message}));
+        }
     }
 }
 

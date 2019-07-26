@@ -86,7 +86,7 @@ class ManagerDetails extends Component {
                     <div className='col-md-8'>
                         <div className='card result-card '>
                             <div className='card-body rounded shadow-sm'>
-                                {isRating ? <RateManager/> : <PersonReviewsList list={v.reviews}/>}
+                                {isRating ? <RateManager/> : <PersonReviewsList list={v.reviews} manager={v.managerName}/>}
                             </div>
                         </div>
                     </div>

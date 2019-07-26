@@ -1,7 +1,11 @@
 import ReviewManagerActions from "./ReviewManagerAction";
 
 const initialState = {
-    rMap: {}
+    rMap: {},
+    submittedReviewId: '',
+    submitMsg: '',
+    submitSuccess: false,
+    openPopUp: false
 };
 
 const ReviewManagerReducer = (state = initialState, action = {}) => {
@@ -16,6 +20,29 @@ const ReviewManagerReducer = (state = initialState, action = {}) => {
             };
             break;
 
+        case ReviewManagerActions.REVIEW_MANAGER_SUBMIT_SUCCESS:
+            changes = {
+                submitSuccess: true,
+                submittedReviewId: action.payload.id,
+                submitMsg: 'Your review is submitted successfully',
+                openPopUp: true
+            };
+            break;
+
+        case ReviewManagerActions.REVIEW_MANAGER_SUBMIT_FAILURE:
+            changes = {
+                submitSuccess: false,
+                submittedReviewId: '',
+                submitMsg: action.message,
+                openPopUp: true
+            };
+            break;
+
+        case ReviewManagerActions.CLOSE_POP_UP:
+            changes = {
+                openPopUp: false
+            };
+            break;
         default:
             return state;
     }
