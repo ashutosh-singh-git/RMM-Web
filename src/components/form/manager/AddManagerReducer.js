@@ -1,7 +1,8 @@
 import AddManagerActions from "./AddManagerAction";
 
 const initialState = {
-    manager: {}
+    manager: {},
+    submitted: false
 };
 
 const AddManagerReducer = (state = initialState, action = {}) => {
@@ -10,10 +11,16 @@ const AddManagerReducer = (state = initialState, action = {}) => {
     switch (action.type) {
         case AddManagerActions.NEW_MANAGER_SUBMIT_SUCCESS:
             changes = {
-                manager: action.payload
+                manager: action.payload,
+                submitted: true
             };
             break;
 
+        case AddManagerActions.NEW_MANAGER_SUBMIT_FALSE:
+            changes = {
+                submitted: false
+            };
+            break;
         default:
             return state;
     }

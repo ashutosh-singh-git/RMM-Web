@@ -156,6 +156,10 @@ html, body, main {
     z-index: 99;
 }
 
+.medium {
+    font-size: 90%;
+}
+
 /*************** MANAGER  RATING RADIO *******************/
 input[type=radio],
 input[type=checkbox] {

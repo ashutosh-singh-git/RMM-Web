@@ -2,8 +2,10 @@ import React, {Component} from "react";
 import connect from "react-redux/src/connect/connect";
 import ReactSelect from "../../ReactSelect";
 import Select from "react-select";
-import {submitNewManagerAction} from "./AddManagerAction";
+import {addManagerFail, submitNewManagerAction} from "./AddManagerAction";
 import {DESIGNATIONS, GENDERS} from "../../../config/CommonConfig";
+import SuccessPage from "../../SuccessPage";
+import {getManagerId, getManagerSlug} from "../../../util/CommonUtil";
 
 class AddManager extends Component {
 
@@ -60,6 +62,13 @@ class AddManager extends Component {
     render() {
 
         const {companyOptions, companyValue} = this.state;
+        const {submitted, addManagerFail, newManager} = this.props;
+
+        console.log('Submitted Request:', submitted, newManager);
+        if(submitted) {
+            const message = `Manager Added Successfully! <a class="text-info font-weight-bold" href="${getManagerSlug(newManager.name, newManager.id)}/rate">Rate Him</a>`;
+            return <SuccessPage message={message} success={submitted} closePopUp={addManagerFail}/>
+        }
 
         return (
             <>
@@ -130,11 +139,13 @@ class AddManager extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const {search} = state;
+    const {search, add} = state;
 
     return {
-        companies: search.companies
+        companies: search.companies,
+        submitted: add.submitted,
+        newManager: add.manager
     }
 };
 
-export default connect(mapStateToProps, {submitNewManagerAction})(AddManager);
+export default connect(mapStateToProps, {submitNewManagerAction, addManagerFail})(AddManager);

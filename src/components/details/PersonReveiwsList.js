@@ -1,5 +1,5 @@
 import React from "react";
-import {FEEDBACK_OPTIONS, FEEDBACK_RATING} from "../../config/CommonConfig";
+import {FEEDBACK_OPTIONS, FEEDBACK_RATING, REVIEW_LABEL_TYPES} from "../../config/CommonConfig";
 import {formatDate} from "../../util/CommonUtil";
 
 const PersonReviewsList = ({list, manager}) => {
@@ -15,18 +15,18 @@ const PersonReviewsList = ({list, manager}) => {
         <>
             <p className='font-weight-bolder h5 text-muted mb-3'>Reviews & Ratings</p>
             {data.map(val => (
-                <div key={val.id} className='flex-row my-2'>
+                <div key={val.id} className='flex-row my-2 medium'>
                     <div>
-                        <span className='small font-weight-bold'>{val.name} </span>
+                        <span className=' font-weight-bold'>{val.name} </span>
                         <span className='mx-2'>
                                             {
-                                                Array.from({length: val.overallRating}, (item, index) => (
+                                                Array.from({length: Math.floor(val.overallRating/2)}, (item, index) => (
                                                     <span className="fa fa-star orange-color" data-rating={index + 1}
                                                           key={index}/>
                                                 ))
                                             }
                             {
-                                Array.from({length: 5 - val.overallRating}, (item, index) => (
+                                Array.from({length: 5 - Math.floor(val.overallRating/2)}, (item, index) => (
                                     <span className="fa fa-star text-muted"
                                           data-rating={val.overallRating + index + 1} key={index}/>
                                 ))
@@ -36,11 +36,11 @@ const PersonReviewsList = ({list, manager}) => {
                         <div className='text-muted small row'>
                             <div className='col-4'>
                                 <i className="material-icons small floral-color">radio_button_checked</i>
-                                <span> 5 years of experience</span>
+                                <span> {val.reviewerExperience} of experience</span>
                             </div>
                             <div className='col-4'>
                                 <i className="material-icons small floral-color">radio_button_checked</i>
-                                <span> Worked with toshi</span>
+                                <span> Worked {REVIEW_LABEL_TYPES.LABEL3[val.reviewerRelation]} {manager}</span>
                             </div>
                         </div>
                         <p className='text-muted my-3'>{val.comments}</p>
@@ -48,19 +48,19 @@ const PersonReviewsList = ({list, manager}) => {
                             {Object.keys(val.feedback).map(re => {
                                 const feedbackKey = FEEDBACK_OPTIONS[re.toUpperCase()];
                                 return (
-                                    <div className='small' key={re}>
+                                    <div key={re}>
                                         <span className='font-weight-bold text-capitalize'>{feedbackKey}</span> - <span>
                                         <span
                                             className='text-muted'>{FEEDBACK_RATING[feedbackKey][val.feedback[re] - 1]}</span></span>
                                     </div>
                                 )
                             })}
-                            <div className='small'>
+                            <div className=''>
                                 <span className='font-weight-bold text-capitalize'>Will Recommend</span> - <span><span
                                 className='text-muted'>{Boolean(val.isRecommended).toString()}</span></span>
                             </div>
                         </div>
-                        <p className='text-muted small row'>
+                        <p className='text-muted  row'>
                             <span className='col-md-3'>Was this Helpful?</span>
                             <span className='col-md-2'><button
                                 className='btn-transparent fa fa-thumbs-up floral-color'

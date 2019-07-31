@@ -4,7 +4,7 @@ import {EXPERIENCE, REVIEW_LABEL_TYPES} from "../../../config/CommonConfig";
 import TenRating from "../../TenRating";
 import RadioRating from "../../RadioRating";
 import {connect} from "react-redux";
-import {reviewFormUpdate, submitNewReviewAction} from "./ReviewManagerAction";
+import {closePopUp, reviewFormUpdate, submitNewReviewAction} from "./ReviewManagerAction";
 import {GoogleReCaptcha} from 'react-google-recaptcha-v3';
 import Select from "react-select";
 import {createFingerPrint, verifyRMap} from "../../../util/CommonUtil";
@@ -49,6 +49,11 @@ class RateManager extends Component {
         reviewFormUpdate({key: 'comments', value: e.currentTarget.value});
     };
 
+    handleNameChange = (e) => {
+        const {reviewFormUpdate} = this.props;
+        reviewFormUpdate({key: 'name', value: e.currentTarget.value});
+    };
+
     verifyCallback = (e) => {
         //TODO: VerifyReCaptcha token
         this.buttonRef.current.disabled = false;
@@ -63,11 +68,11 @@ class RateManager extends Component {
     render() {
 
         const {errorText} = this.state;
-        const {submitSuccess, submitMsg, openPopUp} = this.props;
+        const {submitSuccess, submitMsg, openPopUp, closePopUp} = this.props;
 
         if(openPopUp) {
             return (
-                <SuccessPage message={submitMsg} success={submitSuccess}/>
+                <SuccessPage message={submitMsg} success={submitSuccess} closePopUp={closePopUp}/>
             )
         }
 
@@ -179,7 +184,7 @@ class RateManager extends Component {
                             Visible Name
                         </label>
                         <div className='col-md-8 my-auto'>
-                            <input className='form-input' type={'text'} placeholder={'Anonymous'} name='name'/>
+                            <input className='form-input' type={'text'} onChange={this.handleNameChange} placeholder={'Anonymous'} name='name'/>
                         </div>
                     </div>
                     <div className='row my-4'>
@@ -209,4 +214,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default withRouter(connect(mapStateToProps, {reviewFormUpdate, submitNewReviewAction})(RateManager));
+export default withRouter(connect(mapStateToProps, {reviewFormUpdate, submitNewReviewAction, closePopUp})(RateManager));

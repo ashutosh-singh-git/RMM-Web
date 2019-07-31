@@ -11,12 +11,13 @@ class ManagerDetails extends Component {
 
     componentDidMount() {
         const {match: {params}, reviewSearch, fetchManagerReviews, reviewFormUpdate} = this.props;
-        // const v = results.find(r => r.id === getManagerId(params.name));
-        if (isEmpty(reviewSearch)) {
+        const managerId = getManagerId(params.name);
+        if (isEmpty(reviewSearch) || reviewSearch.id !== managerId) {
             fetchManagerReviews(getManagerId(params.name));
         }
-        reviewFormUpdate({key: 'managerId', value: getManagerId(params.name)})
+        reviewFormUpdate({key: 'managerId', value: managerId})
     }
+
 
     render() {
 

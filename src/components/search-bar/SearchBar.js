@@ -22,7 +22,6 @@ class SearchBar extends Component {
         const {getSearchResult, history} = this.props;
         const ci = companyValue.value;
         const mn = managerValue.label ? managerValue.label : '';
-        console.log(mn, ci);
         e.preventDefault();
         history.push(`/search?ci=${ci}&mn=${mn}`);
         getSearchResult(ci, mn);

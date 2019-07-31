@@ -24,8 +24,8 @@ export const REVIEW_LABEL_TYPES = {
         'Excellent'
     ],
     LABEL3: [
-        'With Him',
-        'For Him',
+        'With',
+        'For',
         'None'
     ],
 };
@@ -62,6 +62,7 @@ export const FEEDBACK_OPTIONS = {
     COMMUNICATION: 'Effective Communication',
     LEADERSHIP: 'Leadership Skills',
     MANAGING: 'Management Skills',
+    REVIEWER_RELATION: 'reviewerRelation'
 };
 
 export const FEEDBACK_RATING = {
