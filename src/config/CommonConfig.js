@@ -1,10 +1,12 @@
 
+const domain = 'https://13.127.88.117:8443';
+
 export const CommonConfig = {
-    CompanyAll : 'http://localhost:8080/company/all',
-    AddManager : 'http://localhost:8080/manager',
-    AddReview : 'http://localhost:8080/review',
-    ManagerSearch : 'http://localhost:8080/search',
-    ManagerReviewSearch : 'http://localhost:8080/search/review',
+    CompanyAll : `${domain}/company/all`,
+    AddManager : `${domain}/manager`,
+    AddReview : `${domain}/review`,
+    ManagerSearch : `${domain}/search`,
+    ManagerReviewSearch : `${domain}/search/review`,
 };
 
 
