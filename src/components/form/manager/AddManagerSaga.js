@@ -1,6 +1,6 @@
 import {call, put,} from 'redux-saga/effects';
 import {takeFirst} from "../../../util/ReduxSagaUtil";
-import AddManagerActions, {submitNewManagerSuccess} from "./AddManagerAction";
+import AddManagerActions, {submitNewManagerFailure, submitNewManagerSuccess} from "./AddManagerAction";
 import {submitNewManager} from "../../../controller/ReviewController";
 
 function* newManagerAddition(action) {
@@ -13,6 +13,10 @@ function* newManagerAddition(action) {
     }
     catch (e) {
         console.error(e);
+        if(e.status === 400){
+            const {message} = e.data;
+            yield put(submitNewManagerFailure({message}));
+        }
     }
 }
 

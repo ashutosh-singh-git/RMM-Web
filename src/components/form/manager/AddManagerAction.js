@@ -1,7 +1,8 @@
 export const AddManagerActions = {
     NEW_MANAGER_SUBMIT: 'NEW_MANAGER_SUBMIT',
     NEW_MANAGER_SUBMIT_SUCCESS: 'NEW_MANAGER_SUBMIT_SUCCESS',
-    NEW_MANAGER_SUBMIT_FALSE: 'NEW_MANAGER_SUBMIT_FALSE',
+    NEW_MANAGER_SUBMIT_FAILURE: 'NEW_MANAGER_SUBMIT_FAILURE',
+    CLOSE_POP_UP_ADD_MANAGER: 'CLOSE_POP_UP_ADD_MANAGER',
 };
 
 export default AddManagerActions;
@@ -16,6 +17,11 @@ export const submitNewManagerSuccess = payload => ({
     ...payload
 });
 
-export const addManagerFail = () => ({
-    type: AddManagerActions.NEW_MANAGER_SUBMIT_FALSE,
+export const submitNewManagerFailure = payload => ({
+    type: AddManagerActions.NEW_MANAGER_SUBMIT_FAILURE,
+    ...payload
+});
+
+export const closeManagerPopUp = () => ({
+    type: AddManagerActions.CLOSE_POP_UP_ADD_MANAGER,
 });

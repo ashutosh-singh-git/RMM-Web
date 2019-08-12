@@ -2,7 +2,9 @@ import AddManagerActions from "./AddManagerAction";
 
 const initialState = {
     manager: {},
-    submitted: false
+    submitted: false,
+    submitMsg: '',
+    openPopUp: false
 };
 
 const AddManagerReducer = (state = initialState, action = {}) => {
@@ -12,13 +14,22 @@ const AddManagerReducer = (state = initialState, action = {}) => {
         case AddManagerActions.NEW_MANAGER_SUBMIT_SUCCESS:
             changes = {
                 manager: action.payload,
-                submitted: true
+                submitted: true,
+                openPopUp: true
             };
             break;
 
-        case AddManagerActions.NEW_MANAGER_SUBMIT_FALSE:
+        case AddManagerActions.NEW_MANAGER_SUBMIT_FAILURE:
             changes = {
-                submitted: false
+                submitMsg: action.message,
+                submitted: false,
+                openPopUp: true
+            };
+            break;
+
+        case AddManagerActions.CLOSE_POP_UP_ADD_MANAGER:
+            changes = {
+                openPopUp: false
             };
             break;
         default:

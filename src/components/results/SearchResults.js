@@ -26,16 +26,18 @@ class SearchResults extends Component {
             );
         }
 
+        const company = results[0].companyName;
+
         return (
             <>
-                <div className='h4 text-muted mt-2'><span>Search Results For - </span>
-                    <span className='font-weight-bolder'>{mn ? mn : 'Company'}</span> || <span
+                <div className="col h4 text-muted mt-2"><span>Search Results For - </span>
+                    <span className='font-weight-bolder'>{mn ? mn : company ? company : 'Company'}</span> || <span
                         className='h6'>Couldn't see the manager </span>
                     <Link to='add'><span className='h6 floral-color'>Add A Manager</span></Link>
                 </div>
-                <div className='row flex-row'>
+                <div className='row mx-auto'>
                     {results.map(v => (
-                            <div className='col-md-4' key={v.id}>
+                            <div className='col-sm-6 col-lg-4' key={v.id}>
                                 <div className='card result-card '>
                                     <div className='card-body rounded shadow-sm'>
                                         <div className='card-title'>
@@ -79,7 +81,7 @@ class SearchResults extends Component {
                                                 <span className='text-muted'>No reviews for this manager yet </span>
                                                 <Link to={`${getManagerSlug(v.managerName, v.id)}/rate`}>
                                                     <button className='btn h-100 rounded cmn-btn my-3' type="submit">
-                                                        <span className='btn-txt'>{'RATE THIS MANAGER'}</span>
+                                                        <span className='btn-txt small'>{'RATE THIS MANAGER'}</span>
                                                     </button>
                                                 </Link>
                                             </div>

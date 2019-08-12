@@ -33,11 +33,11 @@ class ManagerDetails extends Component {
 
         return (
             <>
-                <div className='h4 text-muted mt-2'>
+                <div className='col h4 text-muted mt-2'>
                     <span className='font-weight-bolder'>Manager Details</span>
                 </div>
-                <div className='row flex-row'>
-                    <div className='col-md-4' key={v.id}>
+                <div className='row mx-auto'>
+                    <div className='col col-md-4' key={v.id}>
                         <div className='card result-card '>
                             <div className='card-body rounded shadow-sm'>
                                 <div className='card-title h4'>
@@ -77,7 +77,7 @@ class ManagerDetails extends Component {
                                         to={isRating ? `${getManagerSlug(v.managerName, v.id)}` : this.props.location.pathname + '/rate'}>
                                         <button className='btn h-100 rounded cmn-btn my-3' type="submit">
                                             <span
-                                                className='btn-txt'>{isRating ? 'SEE REVIEWS' : 'RATE THIS MANAGER'}</span>
+                                                className='btn-txt small'>{isRating ? 'SEE REVIEWS' : 'RATE THIS MANAGER'}</span>
                                         </button>
                                     </Link>
                                 </div>

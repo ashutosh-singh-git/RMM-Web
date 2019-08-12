@@ -34,7 +34,7 @@ class LabelRating extends Component {
             <div className='small'>
                 {labels.map((v, index) =>
                     <input key={v} type='button'
-                           className={`py-1 px-3 rounded-pill mr-2 rate-label ${active === index ? 'label-selected': ''}`}
+                           className={`my-1 py-1 px-3 rounded-pill mr-2 rate-label ${active === index ? 'label-selected': ''}`}
                            onClick={() => this.labelClicked(index)} value={v}/>)}
             </div>
         )

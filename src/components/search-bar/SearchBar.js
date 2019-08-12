@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import connect from "react-redux/src/connect/connect";
 import {getAllCompaniesAction, getSearchResult} from "./SearchAction";
 import ReactSelect from "../ReactSelect";
-import {Link, withRouter} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 class SearchBar extends Component {
 
@@ -53,7 +53,7 @@ class SearchBar extends Component {
     };
 
     updateManagerValue = (value) => {
-        console.log('manager',value);
+        console.log('manager', value);
         this.setState({
             managerValue: value
         })
@@ -65,46 +65,32 @@ class SearchBar extends Component {
         const {managerOptions, companyOptions, companyValue, managerValue} = this.state;
         return (
 
-            <nav className="nav nav-bar" sticky='top'>
-                <div className='container-fluid'>
-                    <div className="search-bar">
-                        <div className='row'>
-                            <div className='col-2'>
-                                <Link className="navbar-brand" to="/"><span className='logo'>Manager Review</span></Link>
-                            </div>
-                            <div className='col-8'>
-                                <div className='row'>
-                                    <div className='col-5'>
-                                        <ReactSelect options={managerOptions}
-                                                     placeholder='Manager'
-                                                     value={managerValue}
-                                                     handleOnChange={this.updateManagerValue}
-                                                     className='text-dark'
-                                        />
-                                    </div>
-                                    <div className='col-5'>
-                                        <ReactSelect options={companyOptions}
-                                                     placeholder='Company'
-                                                     value={companyValue}
-                                                     handleOnChange={this.updateCompanyValue}
-                                                     className='text-dark'
-                                        />
-                                    </div>
-                                    <div className='col-2 mx-auto'>
-                                        <button className='btn h-100 rounded cmn-btn search-btn' type="submit"
-                                                onClick={this.onSearchSubmit}>
-                                            <span className='btn-txt'>SEARCH</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='col-2 my-auto'>
-                                <span className='float-right'>Login | Register</span>
-                            </div>
-                        </div>
-                    </div>
+            <div className='row w-100 m-0'>
+                <div className='col-5 pr-1'>
+                    <ReactSelect options={managerOptions}
+                                 placeholder='Manager'
+                                 value={managerValue}
+                                 handleOnChange={this.updateManagerValue}
+                                 className='text-dark'
+                    />
                 </div>
-            </nav>
+                <div className='col-5 px-1'>
+                    <ReactSelect options={companyOptions}
+                                 placeholder='Company'
+                                 value={companyValue}
+                                 handleOnChange={this.updateCompanyValue}
+                                 className='text-dark'
+                    />
+                </div>
+                <div className='col-2 mx-auto pl-1'>
+                    <button className='h-100 w-100 cmn-btn text-center' type="submit"
+                            onClick={this.onSearchSubmit}>
+                        <i className="material-icons">search</i>
+                        <span className="d-none d-lg-flex">Search</span>
+                    </button>
+                </div>
+            </div>
+
         );
     }
 

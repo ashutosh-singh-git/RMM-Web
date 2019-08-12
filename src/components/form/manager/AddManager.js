@@ -2,10 +2,11 @@ import React, {Component} from "react";
 import connect from "react-redux/src/connect/connect";
 import ReactSelect from "../../ReactSelect";
 import Select from "react-select";
-import {addManagerFail, submitNewManagerAction} from "./AddManagerAction";
+import {closeManagerPopUp, submitNewManagerAction} from "./AddManagerAction";
 import {DESIGNATIONS, GENDERS} from "../../../config/CommonConfig";
 import SuccessPage from "../../SuccessPage";
-import {getManagerId, getManagerSlug} from "../../../util/CommonUtil";
+import {getManagerSlug} from "../../../util/CommonUtil";
+import {CITIES} from "../../../config/cities";
 
 class AddManager extends Component {
 
@@ -15,7 +16,9 @@ class AddManager extends Component {
         this.state = {
             companyOptions: [],
             companyValue: '',
-        }
+            cityValue: '',
+        };
+
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -38,18 +41,34 @@ class AddManager extends Component {
         })
     };
 
+    updateCityValue = (value) => {
+        this.setState({
+            cityValue: value
+        })
+    };
+
     handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        const {companyValue} = this.state;
+        const {companyValue, cityValue, companyOptions} = this.state;
 
         console.log(companyValue);
-        if (!companyValue) {
-            alert('company name is required');
+        if (!companyValue || !cityValue) {
+            alert('company and city are required');
             return;
         }
+        console.log('compoa: ', companyOptions, companyValue);
+        if (!companyOptions.find(val => val.value === companyValue.value)) {
+            alert('please select company from given items');
+            return;
+        }
+        if (!CITIES.find(val => val.value === cityValue.value)) {
+            alert('please select city from given items');
+            return;
+        }
+
         let data = {
-            city: form.city.value,
+            city: cityValue.value,
             companyName: companyValue.label,
             companyId: companyValue.value !== 1000 ? companyValue.value : '',
             designation: form.designation.value,
@@ -61,12 +80,13 @@ class AddManager extends Component {
 
     render() {
 
-        const {companyOptions, companyValue} = this.state;
-        const {submitted, addManagerFail, newManager} = this.props;
+        const {companyOptions, companyValue, cityValue} = this.state;
+        const {submitted, submitMsg, addManagerFail, newManager, openPopUp} = this.props;
 
-        console.log('Submitted Request:', submitted, newManager);
-        if(submitted) {
-            const message = `Manager Added Successfully! <a class="text-info font-weight-bold" href="${getManagerSlug(newManager.name, newManager.id)}/rate">Rate Him</a>`;
+        if (openPopUp) {
+            const message = submitted ?
+                `Manager Added Successfully! <a class="text-info font-weight-bold" href="${getManagerSlug(newManager.name, newManager.id)}/rate">Rate Him</a>`
+                : submitMsg;
             return <SuccessPage message={message} success={submitted} closePopUp={addManagerFail}/>
         }
 
@@ -78,25 +98,26 @@ class AddManager extends Component {
                 <div className='col-md-10 mx-auto' style={{marginTop: "20px"}}>
                     <form onSubmit={this.handleSubmit}>
                         <div className='row form-group'>
-                            <label className='col h-100 my-auto text-muted' htmlFor="formManagerName">
+                            <label className='col-lg-2 col-sm-3 h-100 my-auto text-muted' htmlFor="formManagerName">
                                 Manager Name
                             </label>
-                            <div className='col-sm-2'>
+                            <div className='col-4 col-sm-3 col-lg-2'>
                                 <Select name={'gender'}
                                         options={GENDERS}
                                         defaultValue={GENDERS[0]}
                                         id='formManagerName'
                                 />
                             </div>
-                            <div className='col-sm-8'>
-                                <input className='form-input' type='text' name='manager' required placeholder="Ex. John Doe"/>
+                            <div className='col-8 col-sm-5 col-lg-4'>
+                                <input className='form-input w-100' type='text' name='manager' required
+                                       placeholder="Ex. John Doe"/>
                             </div>
                         </div>
                         <div className='row form-group'>
-                            <label className='col h-100 my-auto text-muted' htmlFor="formProjectManager">
+                            <label className='col-lg-2 col-sm-3 h-100 my-auto text-muted' htmlFor="formProjectManager">
                                 Designation
                             </label>
-                            <div className='col-sm-10'>
+                            <div className='col-sm-8 col-lg-6'>
                                 <Select name={'designation'}
                                         options={DESIGNATIONS}
                                         defaultValue={DESIGNATIONS[0]}
@@ -105,10 +126,10 @@ class AddManager extends Component {
                             </div>
                         </div>
                         <div className='row form-group'>
-                            <label className='col-sm-2 h-100 my-auto text-muted' htmlFor="formPlaintextEmail">
+                            <label className='col-sm-3 col-lg-2 h-100 my-auto text-muted' htmlFor="formPlaintextEmail">
                                 Company
                             </label>
-                            <div className='col-sm-10'>
+                            <div className='col-sm-8 col-lg-6'>
                                 <ReactSelect name={'company'}
                                              required
                                              options={companyOptions}
@@ -120,11 +141,18 @@ class AddManager extends Component {
                             </div>
                         </div>
                         <div className='row form-group'>
-                            <label className='col-sm-2 h-100 my-auto text-muted' htmlFor="formCompanyCity">
+                            <label className='col-sm-3 col-lg-2 h-100 my-auto text-muted' htmlFor="formCompanyCity">
                                 City
                             </label>
-                            <div className='col-sm-10'>
-                                <input className='form-input' type='text' name={'city'} id='formCompanyCity' required placeholder="Gurugram"/>
+                            <div className='col-sm-8 col-lg-6'>
+                                <ReactSelect name={'city'}
+                                             required
+                                             options={CITIES}
+                                             value={cityValue}
+                                             placeholder='City'
+                                             id='formCompanyCity'
+                                             handleOnChange={this.updateCityValue}
+                                />
                             </div>
                         </div>
                         <div className='col'>
@@ -144,8 +172,10 @@ const mapStateToProps = (state) => {
     return {
         companies: search.companies,
         submitted: add.submitted,
-        newManager: add.manager
+        newManager: add.manager,
+        submitMsg: add.submitMsg,
+        openPopUp: add.openPopUp,
     }
 };
 
-export default connect(mapStateToProps, {submitNewManagerAction, addManagerFail})(AddManager);
+export default connect(mapStateToProps, {submitNewManagerAction, addManagerFail: closeManagerPopUp})(AddManager);

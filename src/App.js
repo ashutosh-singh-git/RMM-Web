@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import './static/app.css';
-import SearchBar from "./components/search-bar/SearchBar";
 import ReviewForm from "./components/form/manager/AddManager";
 import ManagerDetails from "./components/details/ManagerDetails";
 import {Route, Switch} from "react-router-dom";
 import SearchResults from "./components/results/SearchResults";
+import HeaderComponent from "./components/HeaderComponent";
 
 class App extends Component {
 
@@ -12,7 +12,7 @@ class App extends Component {
 
         return (
             <div>
-                <SearchBar/>
+                <HeaderComponent/>
                 <main>
                     <div className='container fill'>
                         <Switch>

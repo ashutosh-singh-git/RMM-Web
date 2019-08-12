@@ -9,6 +9,8 @@ class ReactSelect extends Component {
         this.state = {
             openMenu: false,
         }
+
+        this.selectRef = React.createRef();
     }
 
     handleInputChange = (query, {action}) => {
@@ -38,6 +40,16 @@ class ReactSelect extends Component {
         });
     };
 
+    handleFocus = () => {
+        if (this.props.value) {
+            this.selectRef.state.inputValue = this.props.value.label;
+        }
+    };
+
+    handleMenuClose = () => {
+        this.selectRef.blur();
+    };
+
     render() {
 
         const {openMenu} = this.state;
@@ -45,6 +57,9 @@ class ReactSelect extends Component {
 
         return (
             <Select {...this.props}
+                    ref={ref => {
+                        this.selectRef = ref;
+                    }}
                     onChange={this.handleChange}
                     components={
                         {
@@ -56,6 +71,8 @@ class ReactSelect extends Component {
                     onInputChange={this.handleInputChange}
                     menuIsOpen={openMenu}
                     onBlur={this.hideMenu}
+                    onMenuClose={this.handleMenuClose}
+                    onFocus={this.handleFocus}
             />
         );
     }
