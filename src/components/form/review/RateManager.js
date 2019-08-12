@@ -162,12 +162,13 @@ class RateManager extends Component {
                         </label>
                         <div className='col-md-8 my-auto'>
                             <Select name={'reviewerExperience'}
-                                    className={'w-25'}
+                                    className={'w-50'}
                                     options={EXPERIENCE}
                                     autoSize={true}
                                     required
                                     id='formExperience'
                                     onChange={this.handleExperienceChange}
+                                    isSearchable={ false }
                             />
                         </div>
                     </div>
