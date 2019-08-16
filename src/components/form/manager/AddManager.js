@@ -59,8 +59,11 @@ class AddManager extends Component {
         }
         console.log('compoa: ', companyOptions, companyValue);
         if (!companyOptions.find(val => val.value === companyValue.value)) {
-            alert('please select company from given items');
-            return;
+            if (window.confirm('Do you want to add this new company: ' + companyValue.label)) {
+                // Save it!
+            } else {
+                return;
+            }
         }
         if (!CITIES.find(val => val.value === cityValue.value)) {
             alert('please select city from given items');

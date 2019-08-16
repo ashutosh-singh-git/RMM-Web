@@ -78,7 +78,7 @@ class SearchResults extends Component {
                                             </div>
                                             :
                                             <div className='mt-3'>
-                                                <span className='text-muted'>No reviews for this manager yet </span>
+                                                <span className='text-muted'>{v.totalReviews} reviews for this manager yet</span>
                                                 <Link to={`${getManagerSlug(v.managerName, v.id)}/rate`}>
                                                     <button className='btn h-100 rounded cmn-btn my-3' type="submit">
                                                         <span className='btn-txt small'>{'RATE THIS MANAGER'}</span>

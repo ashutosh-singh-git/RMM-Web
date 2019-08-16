@@ -2,6 +2,7 @@ import {call, put,} from 'redux-saga/effects';
 import {takeFirst} from "../../../util/ReduxSagaUtil";
 import {submitNewReview} from "../../../controller/ReviewController";
 import ReviewManagerActions, {submitReviewFailure, submitReviewSuccess} from "./ReviewManagerAction";
+import {fetchManagerReviews} from "../../search-bar/SearchAction";
 
 function* newReviewAddition(action) {
 
@@ -22,6 +23,7 @@ function* newReviewAddition(action) {
         const payload = yield call(submitNewReview, request);
 
         console.log(payload);
+        yield put(fetchManagerReviews(request.managerId));
         yield put(submitReviewSuccess({payload}));
     }
     catch (e) {

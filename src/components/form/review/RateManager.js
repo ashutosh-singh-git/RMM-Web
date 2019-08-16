@@ -27,13 +27,6 @@ class RateManager extends Component {
         this.fingerprint = await createFingerPrint();
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     const {submitSuccess, history, submittedReviewId} = this.props;
-    //     if (submitSuccess) {
-    //         history.push(`/review/success?ri=${submittedReviewId}`);
-    //     }
-    // }
-
     handleSubmit = (e) => {
         e.preventDefault();
         const {rMap, submitNewReviewAction} = this.props;
