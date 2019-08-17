@@ -3,6 +3,7 @@ import {getDesignation, getManagerSlug, getUrlParameter, truncateText} from "../
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {getSearchResult} from "../search-bar/SearchAction";
+import AverageRatingComponent from "../AverageRatingComponent";
 
 class SearchResults extends Component {
 
@@ -50,22 +51,8 @@ class SearchResults extends Component {
                                         </div>
                                         <div className='h6 text-muted'>{v.city}</div>
                                         <div className='row mt-3'>
-                                            <div className='col-md-4'>
-                                                {
-                                                    Array.from({length: v.averageRating}, (item, index) => (
-                                                        <span className="fa fa-star orange-color"
-                                                              data-rating={index + 1}
-                                                              key={index}/>
-                                                    ))
-                                                }
-                                                {
-                                                    Array.from({length: 5 - v.averageRating}, (item, index) => (
-                                                        <span className="fa fa-star text-muted"
-                                                              data-rating={v.averageRating + index + 1}
-                                                              key={index}/>
-                                                    ))
-                                                }</div>
-                                            <div className='col-md-4'>
+                                            <AverageRatingComponent v={v}/>
+                                            <div className='col-lg-5 col-6'>
                                                 <small className='orange-color'>{v.totalReviews} RATINGS</small>
                                             </div>
                                         </div>
@@ -78,8 +65,9 @@ class SearchResults extends Component {
                                             </div>
                                             :
                                             <div className='mt-3'>
-                                                <span className='text-muted'>{v.totalReviews} reviews for this manager yet</span>
-                                                <Link to={`${getManagerSlug(v.managerName, v.id)}/rate`}>
+                                                <span
+                                                    className='text-muted'>{v.totalReviews} reviews for this manager yet</span>
+                                                <Link to={`${getManagerSlug(v.managerName, v.id)}/rate`} className="text-decoration-none" >
                                                     <button className='btn h-100 rounded cmn-btn my-3' type="submit">
                                                         <span className='btn-txt small'>{'RATE THIS MANAGER'}</span>
                                                     </button>

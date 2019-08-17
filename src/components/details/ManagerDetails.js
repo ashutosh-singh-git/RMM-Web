@@ -6,6 +6,7 @@ import RateManager from "../form/review/RateManager";
 import {connect} from "react-redux";
 import {fetchManagerReviews} from "../search-bar/SearchAction";
 import {reviewFormUpdate} from "../form/review/ReviewManagerAction";
+import AverageRatingComponent from "../AverageRatingComponent";
 
 class ManagerDetails extends Component {
 
@@ -42,7 +43,7 @@ class ManagerDetails extends Component {
                             <div className='card-body rounded shadow-sm'>
                                 <div className='card-title h4'>
                                             <span className='font-weight-bolder'>
-                                            {v.managerName}
+                                                {v.managerName}
                                             </span>
                                 </div>
                                 <div className='card-subtitle small'><span>{getDesignation(v.designation)} @ </span>
@@ -50,20 +51,8 @@ class ManagerDetails extends Component {
                                 </div>
                                 <div className='my-1 small text-muted'>{v.city.toUpperCase()}</div>
                                 <div className='row mt-3'>
-                                    <div className='col-md-4'>
-                                        {
-                                            Array.from({length: v.averageRating}, (item, index) => (
-                                                <span className="fa fa-star orange-color" data-rating={index + 1}
-                                                      key={index}/>
-                                            ))
-                                        }
-                                        {
-                                            Array.from({length: 5 - v.averageRating}, (item, index) => (
-                                                <span className="fa fa-star text-muted"
-                                                      data-rating={v.averageRating + index + 1} key={index}/>
-                                            ))
-                                        }</div>
-                                    <div className='col-md-4'>
+                                    <AverageRatingComponent v={v}/>
+                                    <div className='col-lg-5 col-6'>
                                         <small className='orange-color'>{v.totalReviews} RATINGS</small>
                                     </div>
                                 </div>
@@ -87,7 +76,8 @@ class ManagerDetails extends Component {
                     <div className='col-md-8'>
                         <div className='card result-card '>
                             <div className='card-body rounded shadow-sm'>
-                                {isRating ? <RateManager/> : <PersonReviewsList list={v.reviews} manager={v.managerName}/>}
+                                {isRating ? <RateManager/> :
+                                    <PersonReviewsList list={v.reviews} manager={v.managerName}/>}
                             </div>
                         </div>
                     </div>

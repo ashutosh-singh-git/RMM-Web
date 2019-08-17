@@ -84,6 +84,22 @@ a {
     box-sizing: border-box;
 }
 
+/*button.cmn-btn:hover {*/
+    /*border-color: #ffdb3a;*/
+/*}*/
+
+/*button.cmn-btn:active {*/
+    /*border-color: #ffdb3a;*/
+/*}*/
+
+button.cmn-btn:focus {
+    background-color: #00f5de;
+}
+
+button.cmn-btn:hover {
+    background-color: #00f5de;
+}
+
 .add-btn {
     padding: 10px 25px;
     float: right;

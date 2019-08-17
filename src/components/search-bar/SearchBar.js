@@ -47,13 +47,13 @@ class SearchBar extends Component {
     }
 
     updateCompanyValue = (value) => {
+        console.log(value);
         this.setState({
-            companyValue: value
+            companyValue: value.label === '' ? null : value
         })
     };
 
     updateManagerValue = (value) => {
-        console.log('manager', value);
         this.setState({
             managerValue: value
         })
