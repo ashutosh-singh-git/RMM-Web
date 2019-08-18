@@ -48,7 +48,6 @@ class RateManager extends Component {
     };
 
     verifyCallback = (e) => {
-        console.log('callback',e);
         const {reviewFormUpdate} = this.props;
         reviewFormUpdate({key: 'captcha', value: e});
         if(this.buttonRef.current){

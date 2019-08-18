@@ -39,7 +39,6 @@ class AddManager extends Component {
     }
 
     verifyCallback = (e) => {
-        console.log('callback',e);
         this.catpcha = e;
         if(this.buttonRef.current){
             this.buttonRef.current.disabled = false;
