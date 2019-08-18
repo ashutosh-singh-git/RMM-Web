@@ -49,7 +49,9 @@ class RateManager extends Component {
 
     verifyCallback = (e) => {
         //TODO: VerifyReCaptcha token
-        this.buttonRef.current.disabled = false;
+        if(this.buttonRef.current){
+            this.buttonRef.current.disabled = false;
+        }
     };
 
     handleExperienceChange = (event) => {
@@ -77,7 +79,7 @@ class RateManager extends Component {
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formManagerName">
                             Rate Your Manager<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <TenRating name={'overallRating'}/>
                         </div>
                     </div>
@@ -85,7 +87,7 @@ class RateManager extends Component {
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formProjectManager">
                             Skills<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL1} name='skills'/>
                         </div>
                     </div>
@@ -93,7 +95,7 @@ class RateManager extends Component {
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formPlaintextEmail">
                             Behaviour<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL2} name='behaviour'/>
                         </div>
                     </div>
@@ -101,7 +103,7 @@ class RateManager extends Component {
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formKnowledge">
                             Knowledge<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL1} name='knowledge'/>
                         </div>
                     </div>
@@ -109,7 +111,7 @@ class RateManager extends Component {
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formCompanyCity">
                             Transparency<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL2} name='transparency'/>
                         </div>
                     </div>
@@ -117,7 +119,7 @@ class RateManager extends Component {
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formCompanyCity">
                             Effective Communication<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL2} name='communication'/>
                         </div>
                     </div>
@@ -125,7 +127,7 @@ class RateManager extends Component {
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formCompanyCity">
                             Leadership Skills<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL1} name='leadership'/>
                         </div>
                     </div>
@@ -133,7 +135,7 @@ class RateManager extends Component {
                         <label className='col h-100 text-muted font-weight-bolder' htmlFor="formRecommend">
                             Would You Recommend<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8'>
+                        <div className='col col-lg-8'>
                             <RadioRating name='isRecommended'/>
                         </div>
                     </div>
@@ -141,7 +143,7 @@ class RateManager extends Component {
                         <label className='col h-100 text-muted font-weight-bolder' htmlFor="formComments">
                             Comments (if any)
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <textarea className='form-input form-control' onChange={this.handleComments}
                                       name={'comments'} rows={3} id='formComments'
                                       placeholder="Add a Comment..."/>
@@ -153,7 +155,7 @@ class RateManager extends Component {
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formExperience">
                             Industry Experience<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <Select name={'reviewerExperience'}
                                     className={'w-50'}
                                     options={EXPERIENCE}
@@ -169,7 +171,7 @@ class RateManager extends Component {
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formRelation">
                             Working Relation<span className='orange-color'>*</span>
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <LabelRating labels={REVIEW_LABEL_TYPES.LABEL3} name='reviewerRelation'/>
                         </div>
                     </div>
@@ -177,16 +179,16 @@ class RateManager extends Component {
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formName">
                             Visible Name
                         </label>
-                        <div className='col-md-8 my-auto'>
+                        <div className='col-lg-8 my-auto'>
                             <input className='form-input' type={'text'} onChange={this.handleNameChange} placeholder={'Anonymous'} name='name'/>
                         </div>
                     </div>
                     <div className='row my-4'>
                         <div className='col'>
                             {errorText ? <span className='text-danger small'>* {errorText}</span> : null}
-                            <button className='btn h-100 rounded cmn-btn add-btn' disabled ref={this.buttonRef}
+                            <button className='btn rounded cmn-btn add-btn' disabled ref={this.buttonRef}
                                     type="submit">
-                                <span className='btn-txt'>SUBMIT</span>
+                                <span className='small'>SUBMIT</span>
                             </button>
                         </div>
                     </div>

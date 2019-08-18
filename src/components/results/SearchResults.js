@@ -12,7 +12,6 @@ class SearchResults extends Component {
         const ci = getUrlParameter('ci');
         const mn = getUrlParameter('mn');
         getSearchResult(ci, mn);
-        console.log(ci, mn);
     }
 
     render() {

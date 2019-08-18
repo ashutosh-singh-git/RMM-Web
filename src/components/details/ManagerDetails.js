@@ -63,10 +63,12 @@ class ManagerDetails extends Component {
                                 }
                                 <div>
                                     <Link
-                                        to={isRating ? `${getManagerSlug(v.managerName, v.id)}` : this.props.location.pathname + '/rate'}>
+                                        to={isRating ? `${getManagerSlug(v.managerName, v.id)}` : this.props.location.pathname + '/rate'}
+                                        className="text-decoration-none"
+                                    >
                                         <button className='btn h-100 rounded cmn-btn my-3' type="submit">
                                             <span
-                                                className='btn-txt small'>{isRating ? 'SEE REVIEWS' : 'RATE THIS MANAGER'}</span>
+                                                className='small'>{isRating ? 'SEE REVIEWS' : 'RATE THIS MANAGER'}</span>
                                         </button>
                                     </Link>
                                 </div>

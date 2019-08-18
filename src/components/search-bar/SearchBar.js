@@ -3,6 +3,7 @@ import connect from "react-redux/src/connect/connect";
 import {getAllCompaniesAction, getSearchResult} from "./SearchAction";
 import ReactSelect from "../ReactSelect";
 import {withRouter} from "react-router-dom";
+import {getUrlParameter} from "../../util/CommonUtil";
 
 class SearchBar extends Component {
 
@@ -17,6 +18,31 @@ class SearchBar extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.getAllCompaniesAction();
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        const {companies} = nextProps;
+
+        let companyOptions;
+        let changes = {};
+        if (companies && companies.length > 0) {
+            companyOptions = companies.map(val => {
+                return {value: val.id, label: val.name}
+            });
+            const ci = getUrlParameter('ci');
+            if(ci && prevState.companyValue === ""){
+                const currentValue = companyOptions.find(dat => dat.value === ci);
+                changes = {...prevState, companyOptions: companyOptions, companyValue: currentValue};
+            }else {
+                changes = {...prevState, companyOptions: companyOptions};
+            }
+        }
+
+        return Object.keys(changes).length > 0 ? changes : null;
+    }
+
     onSearchSubmit = (e) => {
         const {managerValue, companyValue} = this.state;
         const {getSearchResult, history} = this.props;
@@ -26,25 +52,6 @@ class SearchBar extends Component {
         history.push(`/search?ci=${ci}&mn=${mn}`);
         getSearchResult(ci, mn);
     };
-
-    componentDidMount() {
-        this.props.getAllCompaniesAction();
-    }
-
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        const {companies} = nextProps;
-        let companyOptions;
-        let changes = {};
-        if (companies && companies.length > 0) {
-            companyOptions = companies.map(val => {
-                return {value: val.id, label: val.name}
-            });
-            changes = {...prevState, companyOptions: companyOptions};
-        }
-
-        return Object.keys(changes).length > 0 ? changes : null;
-    }
 
     updateCompanyValue = (value) => {
         console.log(value);
