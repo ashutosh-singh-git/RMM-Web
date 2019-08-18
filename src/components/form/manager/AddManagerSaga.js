@@ -7,7 +7,7 @@ function* newManagerAddition(action) {
 
     try {
         console.log(action);
-        const payload = yield call(submitNewManager, action.data);
+        const payload = yield call(submitNewManager, action.data, action.headers);
 
         yield put(submitNewManagerSuccess({payload}));
     }

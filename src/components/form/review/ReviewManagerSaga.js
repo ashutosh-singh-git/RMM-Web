@@ -9,6 +9,9 @@ function* newReviewAddition(action) {
     try {
         console.log(action.data);
         const d = action.data;
+        const headers = {
+          captcha : d.captcha
+        };
         const request = {
             managerId : d.managerId,
             isRecommended: d.isRecommended,
@@ -20,7 +23,7 @@ function* newReviewAddition(action) {
             reviewerExperience: d.reviewerExperience,
             fingerprint: d.fingerprint,
         };
-        const payload = yield call(submitNewReview, request);
+        const payload = yield call(submitNewReview, request, headers);
 
         console.log(payload);
         yield put(fetchManagerReviews(request.managerId));

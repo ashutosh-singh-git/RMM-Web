@@ -48,7 +48,9 @@ class RateManager extends Component {
     };
 
     verifyCallback = (e) => {
-        //TODO: VerifyReCaptcha token
+        console.log('callback',e);
+        const {reviewFormUpdate} = this.props;
+        reviewFormUpdate({key: 'captcha', value: e});
         if(this.buttonRef.current){
             this.buttonRef.current.disabled = false;
         }
@@ -210,4 +212,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default withRouter(connect(mapStateToProps, {reviewFormUpdate, submitNewReviewAction, closePopUp})(RateManager));
+export default withRouter(connect(mapStateToProps, { reviewFormUpdate, submitNewReviewAction, closePopUp})(RateManager));

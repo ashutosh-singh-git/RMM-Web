@@ -7,12 +7,15 @@ import {DESIGNATIONS, GENDERS} from "../../../config/CommonConfig";
 import SuccessPage from "../../SuccessPage";
 import {getManagerSlug} from "../../../util/CommonUtil";
 import {CITIES} from "../../../config/cities";
+import {GoogleReCaptcha} from "react-google-recaptcha-v3";
 
 class AddManager extends Component {
 
     constructor(props) {
         super(props);
+        this.buttonRef = React.createRef();
 
+        this.catpcha = null;
         this.state = {
             companyOptions: [],
             companyValue: '',
@@ -34,6 +37,14 @@ class AddManager extends Component {
 
         return Object.keys(changes).length > 0 ? changes : null;
     }
+
+    verifyCallback = (e) => {
+        console.log('callback',e);
+        this.catpcha = e;
+        if(this.buttonRef.current){
+            this.buttonRef.current.disabled = false;
+        }
+    };
 
     updateCompanyValue = (value) => {
         this.setState({
@@ -70,6 +81,9 @@ class AddManager extends Component {
             return;
         }
 
+        const headers = {
+            captcha : this.catpcha
+        };
         let data = {
             city: cityValue.value,
             companyName: companyValue.label,
@@ -78,7 +92,7 @@ class AddManager extends Component {
             gender: form.gender.value,
             managerName: form.manager.value
         };
-        this.props.submitNewManagerAction(data);
+        this.props.submitNewManagerAction(data, headers);
     };
 
     render() {
@@ -158,8 +172,9 @@ class AddManager extends Component {
                                 />
                             </div>
                         </div>
+                        <GoogleReCaptcha onVerify={this.verifyCallback}/>
                         <div className='col'>
-                            <button className='btn h-100 rounded cmn-btn add-btn' type="submit">
+                            <button className='btn h-100 rounded cmn-btn add-btn'  disabled ref={this.buttonRef} type="submit">
                                 <span className='btn-txt'>ADD MANAGER</span></button>
                         </div>
                     </form>

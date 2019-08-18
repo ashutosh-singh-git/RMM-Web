@@ -7,9 +7,10 @@ export const AddManagerActions = {
 
 export default AddManagerActions;
 
-export const submitNewManagerAction = (payload) => ({
+export const submitNewManagerAction = (payload, headers) => ({
     type: AddManagerActions.NEW_MANAGER_SUBMIT,
-    data: payload
+    data: payload,
+    headers: headers
 });
 
 export const submitNewManagerSuccess = payload => ({

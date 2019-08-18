@@ -3,12 +3,14 @@ import RequestUtil from "../util/RequestUtil";
 
 const { AddManager, AddReview } = CommonConfig;
 
-export const submitNewManager = (data) => RequestUtil.POST({
+export const submitNewManager = (data, headers) => RequestUtil.POST({
     url: `${AddManager}`,
     data,
+    headers
 });
 
-export const submitNewReview = (data) => RequestUtil.POST({
+export const submitNewReview = (data, headers) => RequestUtil.POST({
     url: `${AddReview}`,
     data,
+    headers
 });

@@ -40,9 +40,11 @@ const ReviewManagerReducer = (state = initialState, action = {}) => {
 
         case ReviewManagerActions.CLOSE_POP_UP:
             changes = {
-                openPopUp: false
+                openPopUp: false,
+                rMap : {}
             };
             break;
+
         default:
             return state;
     }
