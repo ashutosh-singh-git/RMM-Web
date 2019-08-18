@@ -20,13 +20,13 @@ const PersonReviewsList = ({list, manager}) => {
                         <span className=' font-weight-bold'>{val.name} </span>
                         <span className='mx-2'>
                                             {
-                                                Array.from({length: Math.floor(val.overallRating/2)}, (item, index) => (
+                                                Array.from({length: Math.floor(val.overallRating / 2)}, (item, index) => (
                                                     <span className="fa fa-star orange-color" data-rating={index + 1}
                                                           key={index}/>
                                                 ))
                                             }
                             {
-                                Array.from({length: 5 - Math.floor(val.overallRating/2)}, (item, index) => (
+                                Array.from({length: 5 - Math.floor(val.overallRating / 2)}, (item, index) => (
                                     <span className="fa fa-star text-muted"
                                           data-rating={val.overallRating + index + 1} key={index}/>
                                 ))
@@ -34,13 +34,16 @@ const PersonReviewsList = ({list, manager}) => {
                         |
                         <span className='small text-muted mx-2'>Posted On - {formatDate(new Date(val.createdAt))}</span>
                         <div className='text-muted small row'>
-                            <div className='col-4'>
+                            <div className='col-5 col-lg-4'>
                                 <i className="material-icons small floral-color">radio_button_checked</i>
                                 <span> {val.reviewerExperience} of experience</span>
                             </div>
-                            <div className='col-4'>
+                            <div className='col-5 col-lg-4'>
                                 <i className="material-icons small floral-color">radio_button_checked</i>
-                                <span> Worked {REVIEW_LABEL_TYPES.LABEL3[val.reviewerRelation]} {manager}</span>
+                                <span> {REVIEW_LABEL_TYPES.LABEL3[val.reviewerRelation] === 'None' ?
+                                    `Didn't work with ${manager}` :
+                                    `Worked ${REVIEW_LABEL_TYPES.LABEL3[val.reviewerRelation]} ${manager}`}
+                                    </span>
                             </div>
                         </div>
                         <p className='text-muted my-3'>{val.comments}</p>
@@ -61,12 +64,12 @@ const PersonReviewsList = ({list, manager}) => {
                             </div>
                         </div>
                         <p className='text-muted  row'>
-                            <span className='col-md-3'>Was this Helpful?</span>
-                            <span className='col-md-2'><button
+                            <span className='col-md-4 col-lg-3'>Was this Helpful?</span>
+                            <span className='col-md-4 col-lg-3'><button
                                 className='btn-transparent fa fa-thumbs-up floral-color'
                                 aria-hidden="true"/>
                                 {val.helpful} People</span>
-                            <span className='col-md-2'><button
+                            <span className='col-md-4 col-lg-3'><button
                                 className='btn-transparent fa fa-thumbs-down floral-color'
                                 aria-hidden="true"/>
                                 {val.notHelpful} People</span>
