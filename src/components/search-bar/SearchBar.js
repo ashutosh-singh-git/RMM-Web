@@ -45,6 +45,9 @@ class SearchBar extends Component {
 
     onSearchSubmit = (e) => {
         const {managerValue, companyValue} = this.state;
+        if(!companyValue){
+            return;
+        }
         const {getSearchResult, history} = this.props;
         const ci = companyValue.value;
         const mn = managerValue.label ? managerValue.label : '';

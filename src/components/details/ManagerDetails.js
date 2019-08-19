@@ -33,7 +33,7 @@ class ManagerDetails extends Component {
         const isRating = params.function === 'rate';
 
         return (
-            <>
+            <div className='container fill'>
                 <div className='col h4 text-muted mt-2'>
                     <span className='font-weight-bolder'>Manager Details</span>
                 </div>
@@ -41,12 +41,12 @@ class ManagerDetails extends Component {
                     <div className='col col-md-4' key={v.id}>
                         <div className='card result-card '>
                             <div className='card-body rounded shadow-sm'>
-                                <div className='card-title h4'>
+                                <div className='card-title h4 mb-1'>
                                             <span className='font-weight-bolder'>
                                                 {v.managerName}
                                             </span>
                                 </div>
-                                <div className='card-subtitle small'><span>{getDesignation(v.designation)} @ </span>
+                                <div className='card-subtitle small mb-1'><span>{getDesignation(v.designation)} @ </span>
                                     <span className='floral-color font-weight-bold'>{v.companyName}</span>
                                 </div>
                                 <div className='my-1 small text-muted'>{v.city.toUpperCase()}</div>
@@ -84,7 +84,7 @@ class ManagerDetails extends Component {
                         </div>
                     </div>
                 </div>
-            </>
+            </div>
         );
     }
 }

@@ -5,6 +5,8 @@ import ManagerDetails from "./components/details/ManagerDetails";
 import {Route, Switch} from "react-router-dom";
 import SearchResults from "./components/results/SearchResults";
 import HeaderComponent from "./components/HeaderComponent";
+import HomePage from "./components/home/HomePage";
+import FooterComponent from "./components/footer/FooterComponent";
 
 class App extends Component {
 
@@ -14,15 +16,15 @@ class App extends Component {
             <div>
                 <HeaderComponent/>
                 <main>
-                    <div className='container fill'>
-                        <Switch>
-                            <Route path='/add' component={ReviewForm}/>
-                            <Route path='/manager/:name/:function?' component={ManagerDetails}/>
-                            <Route path='/manager/:name/:function?/rate' component={ManagerDetails}/>
-                            <Route path='/search' component={SearchResults}/>
-                        </Switch>
-                    </div>
+                    <Switch>
+                        <Route path='/' exact component={HomePage}/>
+                        <Route path='/add' component={ReviewForm}/>
+                        <Route path='/manager/:name/:function?' component={ManagerDetails}/>
+                        <Route path='/manager/:name/:function?/rate' component={ManagerDetails}/>
+                        <Route path='/search' component={SearchResults}/>
+                    </Switch>
                 </main>
+                <FooterComponent/>
             </div>
         );
     }

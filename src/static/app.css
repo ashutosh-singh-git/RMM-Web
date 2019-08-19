@@ -5,6 +5,8 @@
     --floral-color: #00D3BD;
     --orange-color: #FC9700;
     --nav-bg-color: #1D1E4C;
+    --blue--color: #181897;
+    --footer--color: #333333;
     --font-wt-h3: 25px;
 }
 
@@ -27,6 +29,14 @@ a {
 
 .bg-default-color {
     background-color: var(--main-bg-color);
+}
+
+.bg-footer-color {
+    background-color: var(--footer--color);
+}
+
+.linear-blue-bg {
+    background-image: linear-gradient(to right, var(--nav-bg-color) , var(--blue--color));
 }
 
 .nav-bar {
@@ -119,15 +129,19 @@ html, body, main {
 }
 
 .fill {
-    min-height: 100%;
+    min-height: 600px;
     height: 100%;
-    /*border: 1px solid black;*/
     padding: 25px 0;
 }
 
 .result-card {
     background: white;
     margin: 10px 0;
+}
+
+.testimonial-card {
+    border: 2px solid var(--orange-color);
+    border-radius: 20px 20px 20px 0;
 }
 
 .btn-transparent {
@@ -207,6 +221,10 @@ html, body, main {
 
 .medium {
     font-size: 90%;
+}
+
+.big-font {
+    font-size: 150%;
 }
 
 /*************** MANAGER  RATING RADIO *******************/

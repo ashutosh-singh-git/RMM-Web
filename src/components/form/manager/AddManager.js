@@ -107,7 +107,7 @@ class AddManager extends Component {
         }
 
         return (
-            <>
+            <div className='container fill'>
                 <div className='col-md-10 mx-auto'>
                     <span className='h4 text-muted'>Add Manager</span>
                 </div>
@@ -178,7 +178,7 @@ class AddManager extends Component {
                         </div>
                     </form>
                 </div>
-            </>
+            </div>
         );
     }
 }
