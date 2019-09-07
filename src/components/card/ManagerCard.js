@@ -4,9 +4,9 @@ import {getDesignation, getManagerSlug, truncateText} from "../../util/CommonUti
 import AverageRatingComponent from "../AverageRatingComponent";
 
 const ManagerCard = (props) => {
-    const {v} = props;
+    const {v, slider} = props;
     return (
-        <div className='col-sm-6 col-lg-4' key={v.id}>
+        <div className={slider ? 'px-2' : 'col-sm-6 col-lg-4'} key={v.id}>
             <div className='card result-card '>
                 <div className='card-body rounded shadow-sm'>
                     <div className='card-title mb-1'>

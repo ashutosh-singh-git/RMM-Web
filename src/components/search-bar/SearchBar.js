@@ -96,7 +96,7 @@ class SearchBar extends Component {
                     <button className='h-100 w-100 cmn-btn text-center' type="submit"
                             onClick={this.onSearchSubmit}>
                         <i className="material-icons">search</i>
-                        <span className="d-none d-lg-flex">Search</span>
+                        <span className="search-btn">Search</span>
                     </button>
                 </div>
             </div>

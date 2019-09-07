@@ -33,12 +33,12 @@ class ManagerDetails extends Component {
         const isRating = params.function === 'rate';
 
         return (
-            <div className='container fill'>
+            <div className='container'>
                 <div className='col h4 text-muted mt-2'>
                     <span className='font-weight-bolder'>Manager Details</span>
                 </div>
                 <div className='row mx-auto'>
-                    <div className='col col-md-4' key={v.id}>
+                    <div className='col col-md-5 col-lg-4' key={v.id}>
                         <div className='card result-card '>
                             <div className='card-body rounded shadow-sm'>
                                 <div className='card-title h4 mb-1'>
@@ -75,7 +75,7 @@ class ManagerDetails extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='col-md-8'>
+                    <div className='col-md-7 col-lg-8'>
                         <div className='card result-card '>
                             <div className='card-body rounded shadow-sm'>
                                 {isRating ? <RateManager/> :

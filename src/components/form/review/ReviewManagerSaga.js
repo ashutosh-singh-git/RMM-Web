@@ -10,7 +10,7 @@ function* newReviewAddition(action) {
         console.log(action.data);
         const d = action.data;
         const headers = {
-          captcha : d.captcha
+          rcToken : d.captcha
         };
         const request = {
             managerId : d.managerId,

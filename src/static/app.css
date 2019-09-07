@@ -39,6 +39,25 @@ a {
     background-image: linear-gradient(to right, var(--nav-bg-color) , var(--blue--color));
 }
 
+.linear-blue-bg .slick-dots li button:before{
+    color: white;
+}
+
+.linear-blue-bg .slick-dots li.slick-active button:before{
+    color: white;
+}
+
+.home-data .slick-prev:before {
+    color: black;
+}
+.home-data .slick-next:before {
+    color: black;
+}
+
+.h-banner{
+    min-height: 300px;
+}
+
 .nav-bar {
     background: var(--nav-bg-color);
     height: 120px;
@@ -61,7 +80,13 @@ a {
 }
 
 .search-btn {
-    padding: 5px 25px;
+    display: none;
+}
+
+@media (min-width: 1124px) {
+    .search-btn {
+        display: flex;
+    }
 }
 
 .cmn-btn {
@@ -132,6 +157,12 @@ html, body, main {
     min-height: 600px;
     height: 100%;
     padding: 25px 0;
+}
+
+@media (max-width: 480px) {
+    .fill {
+        min-height: 350px;
+    }
 }
 
 .result-card {

@@ -40,6 +40,7 @@ class AddManager extends Component {
 
     verifyCallback = (e) => {
         this.catpcha = e;
+        console.log(this.catpcha);
         if(this.buttonRef.current){
             this.buttonRef.current.disabled = false;
         }
@@ -81,7 +82,7 @@ class AddManager extends Component {
         }
 
         const headers = {
-            captcha : this.catpcha
+            rcToken : this.catpcha
         };
         let data = {
             city: cityValue.value,
@@ -107,11 +108,11 @@ class AddManager extends Component {
         }
 
         return (
-            <div className='container fill'>
+            <div className='container'>
                 <div className='col-md-10 mx-auto'>
                     <span className='h4 text-muted'>Add Manager</span>
                 </div>
-                <div className='col-md-10 mx-auto' style={{marginTop: "20px"}}>
+                <div className='col-md-10 mx-auto' style={{marginTop: "20px", marginBottom: "70px"}}>
                     <form onSubmit={this.handleSubmit}>
                         <div className='row form-group'>
                             <label className='col-lg-2 col-sm-3 h-100 my-auto text-muted' htmlFor="formManagerName">

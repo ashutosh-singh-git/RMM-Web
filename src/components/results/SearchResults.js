@@ -19,9 +19,11 @@ class SearchResults extends Component {
         const mn = getUrlParameter('mn');
         if (!results || results.length < 1) {
             return (
-                <div className='h4 text-muted mt-2'><span>No Search Results Found For - </span>
-                    <span className='font-weight-bolder'>{getUrlParameter('mn')}</span> ||&nbsp;
-                    <Link to='add'><span className='h6 floral-color'>Add A Manager</span></Link>
+                <div className='container'>
+                    <div className='col h4 text-muted mt-2'><span>No Search Results Found For - </span>
+                        <span className='font-weight-bolder'>{getUrlParameter('mn')}</span> ||&nbsp;
+                        <Link to='add'><span className='h6 floral-color'>Add A Manager</span></Link>
+                    </div>
                 </div>
             );
         }
@@ -29,7 +31,7 @@ class SearchResults extends Component {
         const company = results[0].companyName;
 
         return (
-            <div className='container fill'>
+            <div className='container'>
                 <div className="col h4 text-muted mt-2"><span>Search Results For - </span>
                     <span className='font-weight-bolder'>{mn ? mn : company ? company : 'Company'}</span> || <span
                         className='h6'>Couldn't see the manager </span>

@@ -15,7 +15,7 @@ class App extends Component {
         return (
             <div>
                 <HeaderComponent/>
-                <main>
+                <main className="fill">
                     <Switch>
                         <Route path='/' exact component={HomePage}/>
                         <Route path='/add' component={ReviewForm}/>

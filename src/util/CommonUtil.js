@@ -114,3 +114,47 @@ export const formatDate = (date) => {
 
     return day + ' ' + monthNames[monthIndex] + ' ' + year;
 };
+
+let prv = 0;
+let backprv = 0;
+export function onCarouselWheel(e, carousel) {
+    if (!e || !carousel) {
+        return;
+    }
+    // Firefox & chrome & safari tested
+    // Disable y scrolling
+    if ((Math.abs(e.deltaY) <= Math.abs(e.deltaX))) {
+        if (e.deltaY > 0 || e.deltaY < 0) {
+            return;
+        }
+        //  e.deltaY = 0;
+
+        if (e.deltaX > 0) {
+            if (prv < e.deltaX) {
+                prv = e.deltaX;
+                carousel.slickNext();
+                e.preventDefault();
+            }
+            else {
+                if (e.deltaX === 1) {
+                    prv = 1;
+                }
+                e.preventDefault();
+            }
+        }
+        else {
+            const xVal = Math.abs(e.deltaX);
+            if (backprv < xVal) {
+                backprv = xVal;
+                carousel.slickPrev();
+                e.preventDefault();
+            }
+            else {
+                if (xVal === 1) {
+                    backprv = 1;
+                }
+                e.preventDefault();
+            }
+        }
+    }
+}
