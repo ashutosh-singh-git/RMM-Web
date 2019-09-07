@@ -33,7 +33,7 @@ class ManagerDetails extends Component {
         const isRating = params.function === 'rate';
 
         return (
-            <div className='container'>
+            <div className='container py-3'>
                 <div className='col h4 text-muted mt-2'>
                     <span className='font-weight-bolder'>Manager Details</span>
                 </div>

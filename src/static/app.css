@@ -15,6 +15,10 @@ a {
     color: inherit;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .floral-color {
     color: var(--floral-color);
 }
@@ -156,7 +160,6 @@ html, body, main {
 .fill {
     min-height: 600px;
     height: 100%;
-    padding: 25px 0;
 }
 
 @media (max-width: 480px) {

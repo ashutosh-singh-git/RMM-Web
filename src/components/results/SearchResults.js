@@ -31,7 +31,7 @@ class SearchResults extends Component {
         const company = results[0].companyName;
 
         return (
-            <div className='container'>
+            <div className='container py-3'>
                 <div className="col h4 text-muted mt-2"><span>Search Results For - </span>
                     <span className='font-weight-bolder'>{mn ? mn : company ? company : 'Company'}</span> || <span
                         className='h6'>Couldn't see the manager </span>

@@ -50,6 +50,15 @@ class ReactSelect extends Component {
         this.selectRef.blur();
     };
 
+    customStyles = {
+        control: base => ({
+            ...base,
+            '&:hover': {
+                cursor: 'pointer'
+            }
+        })
+    };
+
     render() {
 
         const {openMenu} = this.state;
@@ -73,6 +82,7 @@ class ReactSelect extends Component {
                     onBlur={this.hideMenu}
                     onMenuClose={this.handleMenuClose}
                     onFocus={this.handleFocus}
+                    styles={this.customStyles}
             />
         );
     }

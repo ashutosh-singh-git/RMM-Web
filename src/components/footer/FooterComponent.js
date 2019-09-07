@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from "react-router-dom";
 
 class FooterComponent extends Component {
     render() {
@@ -17,11 +18,11 @@ class FooterComponent extends Component {
                         <div className="col-lg-4">
                             <div className="float-left">
                                 <h6>Navigation</h6>
-                                <p className="small">Home<br/>
-                                    Add Manager <br/>
-                                    Rate Manager <br/>
-                                    Feedback <br/>
-                                    Privacy Policy <br/>
+                                <p className="small">
+                                    <Link to="/">Home</Link><br/>
+                                    <Link to="/add">Add Manager</Link><br/>
+                                    <a target="blank" href={"https://docs.google.com/forms/d/1ol15p1pkaXPOr4B3IPONE4AqY9nprTYXdFhkcTfRUeg/prefill"}>Feedback </a><br/>
+                                    <Link to={"/policy"}>Privacy Policy</Link><br/>
                                 </p>
                             </div>
                             <div className="float-right">

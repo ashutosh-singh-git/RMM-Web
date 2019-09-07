@@ -45,12 +45,12 @@ class SearchBar extends Component {
 
     onSearchSubmit = (e) => {
         const {managerValue, companyValue} = this.state;
-        if(!companyValue){
+        if(!companyValue && !managerValue){
             return;
         }
         const {getSearchResult, history} = this.props;
-        const ci = companyValue.value;
-        const mn = managerValue.label ? managerValue.label : '';
+        const ci = companyValue && companyValue.value && companyValue.value !== null ? companyValue.value : '';
+        const mn = managerValue && managerValue.label ? managerValue.label : '';
         e.preventDefault();
         history.push(`/search?ci=${ci}&mn=${mn}`);
         getSearchResult(ci, mn);
