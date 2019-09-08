@@ -5,7 +5,6 @@ import {formatDate} from "../../util/CommonUtil";
 const PersonReviewsList = ({list, manager}) => {
     const data = list;
 
-    console.log(data);
     if (!data || data.length < 1) {
         return <p className='text-muted mb-3'>No reviews yet. Be the first one to review {manager}!</p>;
     }

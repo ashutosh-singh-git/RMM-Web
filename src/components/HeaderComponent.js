@@ -21,7 +21,7 @@ class HeaderComponent extends Component {
                                 <SearchBar/>
                             </div>
                             <div className='col-md-2 col-6 my-auto'>
-                                <span className='float-right'>Login | Register</span>
+                                <span className='float-right'><i className="material-icons">person</i></span>
                             </div>
                         </div>
                         <div className='row d-md-none mt-3'>

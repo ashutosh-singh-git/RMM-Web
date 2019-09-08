@@ -203,7 +203,7 @@ html, body, main {
 .rate-label:hover {
     background-color: var(--orange-color);
     color: white;
-    transition: background-color ease-in 250ms;
+    transition: background-color ease-in 50ms;
 }
 
 .rate-label:focus {
@@ -213,7 +213,7 @@ html, body, main {
 }
 
 .rate-label:active {
-    transform: translateY(2px);
+    transform: translateY(1px);
 }
 
 .btn:focus, .btn:active {
@@ -331,7 +331,7 @@ input[type=checkbox] + label:before {
 
 .modal-confirm {
     color: #636363;
-    width: 325px;
+    /*width: 325px;*/
 }
 
 .modal-confirm .modal-content {

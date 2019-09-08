@@ -16,9 +16,8 @@ class ManagerDetails extends Component {
         if (isEmpty(reviewSearch) || reviewSearch.id !== managerId) {
             fetchManagerReviews(getManagerId(params.name));
         }
-        reviewFormUpdate({key: 'managerId', value: managerId})
+        reviewFormUpdate({key: 'managerId', value: managerId});
     }
-
 
     render() {
 
@@ -78,7 +77,7 @@ class ManagerDetails extends Component {
                     <div className='col-md-7 col-lg-8'>
                         <div className='card result-card '>
                             <div className='card-body rounded shadow-sm'>
-                                {isRating ? <RateManager/> :
+                                {isRating ? <RateManager id={v.id}/> :
                                     <PersonReviewsList list={v.reviews} manager={v.managerName}/>}
                             </div>
                         </div>

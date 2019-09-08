@@ -57,15 +57,16 @@ class SearchBar extends Component {
     };
 
     updateCompanyValue = (value) => {
-        console.log(value);
+        // console.log(value);
         this.setState({
             companyValue: value.label === '' ? null : value
         })
     };
 
     updateManagerValue = (value) => {
+        // console.log(value);
         this.setState({
-            managerValue: value
+            managerValue: value.label === '' ? null : value
         })
     };
 
@@ -93,7 +94,7 @@ class SearchBar extends Component {
                     />
                 </div>
                 <div className='col-2 mx-auto pl-1'>
-                    <button className='h-100 w-100 cmn-btn text-center' type="submit"
+                    <button className='h-90 w-100 cmn-btn text-center' type="submit"
                             onClick={this.onSearchSubmit}>
                         <i className="material-icons">search</i>
                         <span className="search-btn">Search</span>

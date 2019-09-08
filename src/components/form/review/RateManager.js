@@ -29,7 +29,8 @@ class RateManager extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const {rMap, submitNewReviewAction} = this.props;
+        const {rMap, submitNewReviewAction, id, reviewFormUpdate} = this.props;
+        reviewFormUpdate({key: 'managerId', value: id});
         if (verifyRMap(rMap)) {
             submitNewReviewAction(rMap);
         } else {
