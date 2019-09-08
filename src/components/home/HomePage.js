@@ -130,7 +130,7 @@ class HomePage extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="container">
+                <div className="container pb-1">
                     <div className="row mt-4 mt-sm-5 mb-3">
                         <div className="col big-font text-muted">Recently Added</div>
                     </div>
