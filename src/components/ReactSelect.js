@@ -47,6 +47,10 @@ class ReactSelect extends Component {
     };
 
     handleMenuClose = () => {
+        const {handleOnChange, value, noOption} = this.props;
+        if(!noOption && value.value === 1000) {
+            handleOnChange('');
+        }
         this.selectRef.blur();
     };
 
@@ -62,7 +66,6 @@ class ReactSelect extends Component {
     render() {
 
         const {openMenu} = this.state;
-
 
         return (
             <Select {...this.props}

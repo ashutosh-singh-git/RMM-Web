@@ -1,5 +1,5 @@
 
-const domain = 'https://13.127.88.117:8443';
+const domain = 'https://localhost:8443';
 
 export const CommonConfig = {
     CompanyAll : `${domain}/company/all`,

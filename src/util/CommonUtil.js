@@ -59,7 +59,6 @@ export const makeSlug = (val, id) => {
 };
 
 export const rateFormKeys = {
-    overallRating: (val) => !isNaN(val) && val > 0 && val < 11,
     isRecommended: (val) => val !== null,
     behaviour: (val) => !isNaN(val) && val > 0 && val < 6,
     knowledge: (val) => !isNaN(val) && val > 0 && val < 6,

@@ -17,7 +17,6 @@ function* newReviewAddition(action) {
             isRecommended: d.isRecommended,
             comments: d.comments,
             name: d.name ? d.name : 'Anonymous',
-            overallRating: d.overallRating,
             feedback: d,
             reviewerRelation: d.reviewerRelation,
             reviewerExperience: d.reviewerExperience,

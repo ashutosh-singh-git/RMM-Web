@@ -19,13 +19,13 @@ const PersonReviewsList = ({list, manager}) => {
                         <span className=' font-weight-bold'>{val.name} </span>
                         <span className='mx-2'>
                                             {
-                                                Array.from({length: Math.floor(val.overallRating / 2)}, (item, index) => (
+                                                Array.from({length: Math.floor(val.overallRating)}, (item, index) => (
                                                     <span className="fa fa-star orange-color" data-rating={index + 1}
                                                           key={index}/>
                                                 ))
                                             }
                             {
-                                Array.from({length: 5 - Math.floor(val.overallRating / 2)}, (item, index) => (
+                                Array.from({length: 5 - Math.floor(val.overallRating)}, (item, index) => (
                                     <span className="fa fa-star text-muted"
                                           data-rating={val.overallRating + index + 1} key={index}/>
                                 ))

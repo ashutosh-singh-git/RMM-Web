@@ -51,7 +51,7 @@ class RateManager extends Component {
     verifyCallback = (e) => {
         const {reviewFormUpdate} = this.props;
         reviewFormUpdate({key: 'captcha', value: e});
-        if(this.buttonRef.current){
+        if(this.buttonRef.current) {
             this.buttonRef.current.disabled = false;
         }
     };
@@ -77,14 +77,6 @@ class RateManager extends Component {
             <div>
                 <p className='font-weight-bolder h5 text-muted mb-3'>Rate This Manager</p>
                 <form onSubmit={this.handleSubmit}>
-                    <div className='row form-group my-4'>
-                        <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formManagerName">
-                            Rate Your Manager<span className='orange-color'>*</span>
-                        </label>
-                        <div className='col-lg-8 my-auto'>
-                            <TenRating name={'overallRating'}/>
-                        </div>
-                    </div>
                     <div className='row form-group my-4'>
                         <label className='col h-100 my-auto text-muted font-weight-bolder' htmlFor="formProjectManager">
                             Skills<span className='orange-color'>*</span>

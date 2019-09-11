@@ -23,7 +23,7 @@ const ManagerCard = (props) => {
                     <div className='row mt-3'>
                         <AverageRatingComponent v={v}/>
                         <div className='col-lg-5 col-6'>
-                            <small className='orange-color'>{v.totalReviews} RATINGS</small>
+                            <small className='orange-color'>{v.totalReviews} REVIEWS</small>
                         </div>
                     </div>
                     {v.totalReviews > 0 && v.promotedReview && v.promotedReview.comments ?

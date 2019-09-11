@@ -83,6 +83,7 @@ class SearchBar extends Component {
                                  value={managerValue}
                                  handleOnChange={this.updateManagerValue}
                                  className='text-dark'
+                                 noOption={true}
                     />
                 </div>
                 <div className='col-5 px-1'>
