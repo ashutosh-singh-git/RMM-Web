@@ -1,5 +1,5 @@
 
-const domain = 'https://www.reveiwthemanager.com';
+const domain = 'https://www.reveiwthemanager.com/api';
 
 export const CommonConfig = {
     CompanyAll : `${domain}/company/all`,
