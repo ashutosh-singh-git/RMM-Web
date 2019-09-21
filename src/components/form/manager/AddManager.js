@@ -152,6 +152,7 @@ class AddManager extends Component {
                                              value={companyValue}
                                              placeholder='Company Name'
                                              id='formPlaintextEmail'
+                                             noOption
                                              handleOnChange={this.updateCompanyValue}
                                 />
                             </div>
