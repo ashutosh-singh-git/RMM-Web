@@ -54,6 +54,14 @@ class ReactSelect extends Component {
         this.selectRef.blur();
     };
 
+    customFilterOption = (option, rawInput) => {
+        const words = rawInput.split(' ');
+        return words.reduce(
+            (acc, cur) => acc && option.label.toLowerCase().includes(cur.toLowerCase()),
+            true,
+        );
+    };
+
     customStyles = {
         control: base => ({
             ...base,
@@ -79,6 +87,7 @@ class ReactSelect extends Component {
                             IndicatorSeparator: () => null
                         }
                     }
+                    filterOption={this.customFilterOption}
                     noOptionsMessage={() => null}
                     onInputChange={this.handleInputChange}
                     menuIsOpen={openMenu}

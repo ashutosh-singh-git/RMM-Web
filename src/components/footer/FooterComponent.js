@@ -29,11 +29,11 @@ class FooterComponent extends Component {
                             <div className="float-right">
                                 <h6>Share On</h6>
                                 <p className="">
-                                    <a target="_blank" href={`${SHARABLE_CONTENT.FB_LINK}?u=${getCurrentUrl()}`}>Facebook</a><br/>
+                                    <a target="_blank" href={`${SHARABLE_CONTENT.FB_LINK}?u=${getCurrentUrl()}`} rel="noopener noreferrer">Facebook</a><br/>
                                     <a target="_blank" href={`${
                                         SHARABLE_CONTENT.TWITTER_LINK
-                                        }?url=${getCurrentUrl()}&text=Review Your Manager&hashtags=ReviewTheManger`}>Twitter</a><br/>
-                                    <a target="_blank" href={`${SHARABLE_CONTENT.LINKEDIN_LINK}url=${encodeURIComponent(getCurrentUrl())}`}>LinkedIn</a><br/>
+                                        }?url=${getCurrentUrl()}&text=Review Your Manager&hashtags=ReviewTheManger`} rel="noopener noreferrer">Twitter</a><br/>
+                                    <a target="_blank" rel="noopener noreferrer" href={`${SHARABLE_CONTENT.LINKEDIN_LINK}url=${encodeURIComponent(getCurrentUrl())}`}>LinkedIn</a><br/>
                                 </p>
                             </div>
                         </div>
