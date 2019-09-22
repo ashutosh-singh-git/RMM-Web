@@ -81,7 +81,7 @@ export const SHARABLE_CONTENT = {
     FB_LINK: 'https://www.facebook.com/sharer/sharer.php',
     TWITTER_LINK: 'https://twitter.com/intent/tweet',
     WHATSAPP_LINK: 'whatsapp://send',
-    LINKEDIN_LINK: 'https://www.linkedin.com/shareArticle?mini=true&source=reveiwthemanager',
+    LINKEDIN_LINK: 'https://www.linkedin.com/sharing/share-offsite/?',
 };
 
 export const HOME_DATA = [

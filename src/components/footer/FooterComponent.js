@@ -33,8 +33,7 @@ class FooterComponent extends Component {
                                     <a target="_blank" href={`${
                                         SHARABLE_CONTENT.TWITTER_LINK
                                         }?url=${getCurrentUrl()}&text=Review Your Manager&hashtags=ReviewTheManger`}>Twitter</a><br/>
-                                    <a target="_blank" href={`${SHARABLE_CONTENT.LINKEDIN_LINK}&url=${getCurrentUrl()
-                                    }&title=Review Your Manager&summary=Find and give reviews to your manager!`}>LinkedIn</a><br/>
+                                    <a target="_blank" href={`${SHARABLE_CONTENT.LINKEDIN_LINK}url=${encodeURIComponent(getCurrentUrl())}`}>LinkedIn</a><br/>
                                 </p>
                             </div>
                         </div>
