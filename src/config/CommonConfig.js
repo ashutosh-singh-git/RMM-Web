@@ -1,5 +1,5 @@
 
-const domain = 'https://www.reveiwthemanager.com/api';
+const domain = 'http://localhost:8080';
 
 export const CommonConfig = {
     CompanyAll : `${domain}/company/all`,

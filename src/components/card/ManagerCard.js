@@ -35,14 +35,9 @@ const ManagerCard = (props) => {
                         </div>
                         :
                         <div className='mt-3'>
-                                                <span
-                                                    className='text-muted'>{v.totalReviews} reviews for this manager yet</span>
-                            <Link to={`${getManagerSlug(v.managerName, v.id)}/rate`}
-                                  className="text-decoration-none">
-                                <button className='btn h-100 rounded cmn-btn my-3' type="submit">
-                                    <span className='btn-txt small'>{'RATE THIS MANAGER'}</span>
-                                </button>
-                            </Link>
+                            <div><i className="fa fa-quote-left" style={{opacity: 0.3}}/></div>
+                            <small>No Comments yet</small>
+                            <footer className="small text-muted">Be the first one to comment!</footer>
                         </div>
                     }
                 </div>

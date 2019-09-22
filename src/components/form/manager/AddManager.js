@@ -8,6 +8,7 @@ import SuccessPage from "../../SuccessPage";
 import {getManagerSlug} from "../../../util/CommonUtil";
 import {CITIES} from "../../../config/cities";
 import {GoogleReCaptcha} from "react-google-recaptcha-v3";
+import {withRouter} from "react-router-dom";
 
 class AddManager extends Component {
 
@@ -21,7 +22,6 @@ class AddManager extends Component {
             companyValue: '',
             cityValue: '',
         };
-
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -38,9 +38,17 @@ class AddManager extends Component {
         return Object.keys(changes).length > 0 ? changes : null;
     }
 
+    componentDidMount() {
+        const { openPopUp, closeManagerPopUp} = this.props;
+        if (openPopUp) {
+            closeManagerPopUp();
+        }
+    }
+
+
     verifyCallback = (e) => {
         this.catpcha = e;
-        if(this.buttonRef.current){
+        if (this.buttonRef.current) {
             this.buttonRef.current.disabled = false;
         }
     };
@@ -81,7 +89,7 @@ class AddManager extends Component {
         }
 
         const headers = {
-            rcToken : this.catpcha
+            rcToken: this.catpcha
         };
         let data = {
             city: cityValue.value,
@@ -97,13 +105,13 @@ class AddManager extends Component {
     render() {
 
         const {companyOptions, companyValue, cityValue} = this.state;
-        const {submitted, submitMsg, addManagerFail, newManager, openPopUp} = this.props;
+        const {submitted, submitMsg, closeManagerPopUp, newManager, openPopUp} = this.props;
 
         if (openPopUp) {
             const message = submitted ?
                 `Manager Added Successfully! <a class="text-info font-weight-bold" href="${getManagerSlug(newManager.name, newManager.id)}/rate">Rate Him</a>`
                 : submitMsg;
-            return <SuccessPage message={message} success={submitted} closePopUp={addManagerFail}/>
+            return <SuccessPage message={message} success={submitted} closePopUp={closeManagerPopUp}/>
         }
 
         return (
@@ -174,7 +182,8 @@ class AddManager extends Component {
                         </div>
                         <GoogleReCaptcha onVerify={this.verifyCallback}/>
                         <div className='col'>
-                            <button className='btn h-100 rounded cmn-btn add-btn'  disabled ref={this.buttonRef} type="submit">
+                            <button className='btn h-100 rounded cmn-btn add-btn' disabled ref={this.buttonRef}
+                                    type="submit">
                                 <span className='btn-txt'>ADD MANAGER</span></button>
                         </div>
                     </form>
@@ -196,4 +205,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, {submitNewManagerAction, addManagerFail: closeManagerPopUp})(AddManager);
+export default withRouter(connect(mapStateToProps, {submitNewManagerAction, closeManagerPopUp})(AddManager));

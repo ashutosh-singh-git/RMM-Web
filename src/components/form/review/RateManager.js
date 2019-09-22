@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import LabelRating from "../../LabelRating";
 import {EXPERIENCE, REVIEW_LABEL_TYPES} from "../../../config/CommonConfig";
-import TenRating from "../../TenRating";
 import RadioRating from "../../RadioRating";
 import {connect} from "react-redux";
 import {closePopUp, reviewFormUpdate, submitNewReviewAction} from "./ReviewManagerAction";

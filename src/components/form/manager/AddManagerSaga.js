@@ -2,6 +2,7 @@ import {call, put,} from 'redux-saga/effects';
 import {takeFirst} from "../../../util/ReduxSagaUtil";
 import AddManagerActions, {submitNewManagerFailure, submitNewManagerSuccess} from "./AddManagerAction";
 import {submitNewManager} from "../../../controller/ReviewController";
+import {getAllCompaniesAction} from "../../search-bar/SearchAction";
 
 function* newManagerAddition(action) {
 
@@ -10,6 +11,7 @@ function* newManagerAddition(action) {
         const payload = yield call(submitNewManager, action.data, action.headers);
 
         yield put(submitNewManagerSuccess({payload}));
+        yield put(getAllCompaniesAction());
     }
     catch (e) {
         console.error(e);
