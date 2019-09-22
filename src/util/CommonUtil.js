@@ -32,6 +32,13 @@ export const createFingerPrint = async () => {
     });
 };
 
+export const getCurrentUrl = () => {
+    if (typeof window !== 'undefined' && window) {
+        return window.document.URL;
+    }
+    return false;
+};
+
 export const isEmpty =(obj) => {
     return Object.keys(obj).length === 0 && obj.constructor === Object;
 };

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import {SHARABLE_CONTENT} from "../../config/CommonConfig";
+import {getCurrentUrl} from "../../util/CommonUtil";
 
 class FooterComponent extends Component {
     render() {
@@ -11,8 +13,7 @@ class FooterComponent extends Component {
                         <div className="col-lg-8">
                             <h6>Rate My Manager</h6>
                             <p className="">Write to us at risingofminds@gmail.com<br/>
-                                Plot-62, Sector - 23, Gurugram, 110092<br/>
-                                +91-8285932260
+                                Phone : +91-8285932260<br/>
                             </p>
                         </div>
                         <div className="col-lg-4">
@@ -26,11 +27,14 @@ class FooterComponent extends Component {
                                 </p>
                             </div>
                             <div className="float-right">
-                                <h6>Follow Us On</h6>
+                                <h6>Share On</h6>
                                 <p className="">
-                                    Facebook<br/>
-                                    Twitter <br/>
-                                    LinkedIn<br/>
+                                    <a target="_blank" href={`${SHARABLE_CONTENT.FB_LINK}?u=${getCurrentUrl()}`}>Facebook</a><br/>
+                                    <a target="_blank" href={`${
+                                        SHARABLE_CONTENT.TWITTER_LINK
+                                        }?url=${getCurrentUrl()}&text=Review Your Manager&hashtags=ReviewTheManger`}>Twitter</a><br/>
+                                    <a target="_blank" href={`${SHARABLE_CONTENT.LINKEDIN_LINK}&url=${getCurrentUrl()
+                                    }&title=Review Your Manager&summary=Find and give reviews to your manager!`}>LinkedIn</a><br/>
                                 </p>
                             </div>
                         </div>

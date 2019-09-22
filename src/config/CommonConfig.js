@@ -77,6 +77,13 @@ export const FEEDBACK_RATING = {
     [FEEDBACK_OPTIONS.MANAGING]: REVIEW_LABEL_TYPES.LABEL1,
 };
 
+export const SHARABLE_CONTENT = {
+    FB_LINK: 'https://www.facebook.com/sharer/sharer.php',
+    TWITTER_LINK: 'https://twitter.com/intent/tweet',
+    WHATSAPP_LINK: 'whatsapp://send',
+    LINKEDIN_LINK: 'https://www.linkedin.com/shareArticle?mini=true&source=reveiwthemanager',
+};
+
 export const HOME_DATA = [
     {
         id: 1,
