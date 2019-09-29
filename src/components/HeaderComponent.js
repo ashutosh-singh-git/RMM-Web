@@ -14,7 +14,7 @@ class HeaderComponent extends Component {
                         <div className='row justify-content-between'>
                             <div className='col-md-2 col-6'>
                                 <Link className="navbar-brand" to="/">
-                                    <span className='logo'>ManagerReview</span>
+                                    <span className='logo'>ReviewManager</span>
                                 </Link>
                             </div>
                             <div className='col-md-8 d-md-flex d-none'>
